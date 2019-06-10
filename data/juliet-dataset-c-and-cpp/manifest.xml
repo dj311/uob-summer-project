@@ -1,39 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container>
-  <testcase id="61955" type="Source Code" status="Accepted" submissionDate="2013-05-20" language="C" author="NSA/Center for Assured Software" numberOfFiles="4" testsuiteid="86 108">
-    <description><![CDATA[CWE: 114 Process Control<br/> BadSource: connect_socket Read data using a connect socket (client side)<br/> GoodSource: Hard code the full pathname to the library<br/> Sink:<br/> BadSink : Load a dynamic link library<br/> Flow Variant: 16 Control flow: while(1)]]></description>
+  <testcase id="248716" type="Source Code" status="Accepted" submissionDate="2017-10-06" language="C++" author="NSA/Center for Assured Software" numberOfFiles="5" testsuiteid="108">
+    <description><![CDATA[CWE: 78 OS Command Injection<br/> BadSource: listen_socket Read data using a listen socket (server side)<br/> GoodSource: Fixed string<br/> Sinks: w32_spawnvp<br/> BadSink : execute command with wspawnvp<br/> Flow Variant: 72 Data flow: data passed in a vector from one function to another in different source files]]></description>
+    <association type="replacing" testcaseid="122736"/>
     <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
-    <file path="000/061/955/CWE114_Process_Control__w32_char_connect_socket_16.c" language="C" size="5958" checksum="ec5cf7d953d95a539c44b2662b572fddfc4a2808">
-      <mixed line="125" name="CWE-114: Process Control"/>
+    <file path="000/248/716/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_72a.cpp" language="C++" size="6067" checksum="7969ffb1cc805f8633236492527a7d6dec429026"/>
+    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
+    <file path="000/248/716/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_72b.cpp" language="C++" size="2356" checksum="60f9d6228cc8725bba2dfc0dc8a498b2fda01783">
+      <mixed line="55" name="CWE-078: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"/>
     </file>
     <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
-    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
   </testcase>
-  <testcase id="61956" type="Source Code" status="Accepted" submissionDate="2013-05-20" language="C" author="NSA/Center for Assured Software" numberOfFiles="4" testsuiteid="86 108">
-    <description><![CDATA[CWE: 114 Process Control<br/> BadSource: connect_socket Read data using a connect socket (client side)<br/> GoodSource: Hard code the full pathname to the library<br/> Sink:<br/> BadSink : Load a dynamic link library<br/> Flow Variant: 17 Control flow: for loops]]></description>
-    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
-    <file path="000/061/956/CWE114_Process_Control__w32_char_connect_socket_17.c" language="C" size="5977" checksum="ec1e07ac0a192579854d574547cfeb01e692bf9d">
-      <mixed line="125" name="CWE-114: Process Control"/>
-    </file>
+  <testcase id="248717" type="Source Code" status="Accepted" submissionDate="2017-10-06" language="C++" author="NSA/Center for Assured Software" numberOfFiles="5" testsuiteid="108">
+    <description><![CDATA[CWE: 78 OS Command Injection<br/> BadSource: listen_socket Read data using a listen socket (server side)<br/> GoodSource: Fixed string<br/> Sinks: w32_spawnvp<br/> BadSink : execute command with wspawnvp<br/> Flow Variant: 73 Data flow: data passed in a list from one function to another in different source files]]></description>
+    <association type="replacing" testcaseid="122737"/>
+    <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
+    <file path="000/248/717/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_73a.cpp" language="C++" size="5919" checksum="6a4d1d69e969ab53fa4b6d204669f639a6d0abf9"/>
     <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
+    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
+    <file path="000/248/717/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_73b.cpp" language="C++" size="2346" checksum="36b901aa65f593a25490bd26ac6eea7c7e9e8f8b">
+      <mixed line="55" name="CWE-078: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"/>
+    </file>
+  </testcase>
+  <testcase id="248718" type="Source Code" status="Accepted" submissionDate="2017-10-06" language="C++" author="NSA/Center for Assured Software" numberOfFiles="5" testsuiteid="108">
+    <description><![CDATA[CWE: 78 OS Command Injection<br/> BadSource: listen_socket Read data using a listen socket (server side)<br/> GoodSource: Fixed string<br/> Sinks: w32_spawnvp<br/> BadSink : execute command with wspawnvp<br/> Flow Variant: 74 Data flow: data passed in a map from one function to another in different source files]]></description>
+    <association type="replacing" testcaseid="122738"/>
+    <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
+    <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
+    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
+    <file path="000/248/718/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_74b.cpp" language="C++" size="2339" checksum="1ee671356e1282516645de09dd95acf168ba4014">
+      <mixed line="55" name="CWE-078: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"/>
+    </file>
+    <file path="000/248/718/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_74a.cpp" language="C++" size="5883" checksum="eeb7b671b85f391db2384ce2c1b3bfcedc5dc6ff"/>
+  </testcase>
+  <testcase id="248719" type="Source Code" status="Accepted" submissionDate="2017-10-06" language="C++" author="NSA/Center for Assured Software" numberOfFiles="7" testsuiteid="108">
+    <description><![CDATA[CWE: 78 OS Command Injection<br/> BadSource: listen_socket Read data using a listen socket (server side)<br/> GoodSource: Fixed string<br/> Sinks: w32_spawnvp<br/> BadSink : execute command with wspawnvp<br/> Flow Variant: 81 Data flow: data passed in a parameter to an virtual method called via a reference]]></description>
+    <association type="replacing" testcaseid="122739"/>
+    <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
+    <file path="000/248/719/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_81_goodG2B.cpp" language="C++" size="1362" checksum="580aebd284c1fb079b9ec41232a2405bd79c88b9"/>
+    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
+    <file path="000/248/719/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_81a.cpp" language="C++" size="5438" checksum="49448bb4eba7fb01aca6d8f012889d70095718dc"/>
+    <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
+    <file path="000/248/719/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_81_bad.cpp" language="C++" size="1348" checksum="32c29e15881acb517fb6c02a0c2484e2c795b546">
+      <mixed line="33" name="CWE-078: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"/>
+    </file>
+    <file path="000/248/719/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_81.h" language="C" size="1796" checksum="6e1ec0848176aa70290646e4662a6350ed177dce"/>
+  </testcase>
+  <testcase id="248720" type="Source Code" status="Accepted" submissionDate="2017-10-06" language="C++" author="NSA/Center for Assured Software" numberOfFiles="7" testsuiteid="108">
+    <description><![CDATA[CWE: 78 OS Command Injection<br/> BadSource: listen_socket Read data using a listen socket (server side)<br/> GoodSource: Fixed string<br/> BadSink : execute command with wspawnvp<br/> Flow Variant: 82 Data flow: data passed in a parameter to an virtual method called via a pointer]]></description>
+    <association type="replacing" testcaseid="122740"/>
+    <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
+    <file path="000/248/720/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_82_bad.cpp" language="C++" size="1340" checksum="b1110de8318e4d10a15c00274790e366db60d6f7">
+      <mixed line="33" name="CWE-078: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"/>
+    </file>
+    <file path="000/248/720/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_82a.cpp" language="C++" size="5478" checksum="e7ce6ac2b785636d132829fc78a6fb1a7f83e1a2"/>
+    <file path="000/248/720/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_82.h" language="C" size="1753" checksum="d1be27784b50d11c37c2eeb16926841a79c65973"/>
+    <file path="000/248/720/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_82_goodG2B.cpp" language="C++" size="1354" checksum="3f85b1101b10fcd3791bc66bb5978f15c46b0a80"/>
+    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
+    <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
+  </testcase>
+  <testcase id="248721" type="Source Code" status="Accepted" submissionDate="2017-10-06" language="C++" author="NSA/Center for Assured Software" numberOfFiles="7" testsuiteid="108">
+    <description><![CDATA[CWE: 78 OS Command Injection<br/> BadSource: listen_socket Read data using a listen socket (server side)<br/> GoodSource: Fixed string<br/> Sinks: w32_spawnvp<br/> BadSink : execute command with wspawnvp<br/> Flow Variant: 83 Data flow: data passed to class constructor and destructor by declaring the class object on the stack]]></description>
+    <association type="replacing" testcaseid="122741"/>
+    <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
+    <file path="000/248/721/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_83a.cpp" language="C++" size="2234" checksum="d11ade536ed81eca2f7d85bf23dcb08360c111f3"/>
+    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
+    <file path="000/248/721/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_83_goodG2B.cpp" language="C++" size="1719" checksum="8f1c894cfcd5bd823c8810c7777cba4da97f52bd"/>
+    <file path="000/248/721/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_83_bad.cpp" language="C++" size="4505" checksum="18b20cc3bd3ad5b4b6d76801dcaaf44018c297f7">
+      <mixed line="137" name="CWE-078: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"/>
+    </file>
+    <file path="000/248/721/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_83.h" language="C" size="1818" checksum="5c184ad68febf41922ac382fbbd713ddbde71646"/>
     <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
   </testcase>
-  <testcase id="61957" type="Source Code" status="Accepted" submissionDate="2013-05-20" language="C" author="NSA/Center for Assured Software" numberOfFiles="4" testsuiteid="86 108">
-    <description><![CDATA[CWE: 114 Process Control<br/> BadSource: connect_socket Read data using a connect socket (client side)<br/> GoodSource: Hard code the full pathname to the library<br/> Sink:<br/> BadSink : Load a dynamic link library<br/> Flow Variant: 18 Control flow: goto statements]]></description>
+  <testcase id="248722" type="Source Code" status="Accepted" submissionDate="2017-10-06" language="C++" author="NSA/Center for Assured Software" numberOfFiles="9" testsuiteid="108">
+    <description><![CDATA[CWE: 78 OS Command Injection<br/> BadSource: listen_socket Read data using a listen socket (server side)<br/> GoodSource: Fixed string<br/> Sinks: w32_spawnvp<br/> BadSink : execute command with wspawnvp<br/> Flow Variant: 84 Data flow: data passed to class constructor and destructor by declaring the class object on the heap and deleting it after use]]></description>
+    <association type="replacing" testcaseid="122742"/>
+    <file path="000/248/722/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_84.h" language="C" size="1843" checksum="c33251cdab94e6ee2ededf0f5d1a0eb5796e482e"/>
     <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
+    <file path="shared/108/std_thread.h" language="C" size="705" checksum="30c379e3195e21db01665d2b04aadcb58a4cacc9"/>
     <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
-    <file path="000/061/957/CWE114_Process_Control__w32_char_connect_socket_18.c" language="C" size="5674" checksum="a539d7b08a274bf37415a852c14237ebda122205">
-      <mixed line="123" name="CWE-114: Process Control"/>
+    <file path="shared/108/std_thread.c" language="C" size="4580" checksum="e2e9aef736aa0881ad8a326c4fb83b226b6a674a"/>
+    <file path="000/248/722/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_84a.cpp" language="C++" size="2468" checksum="c973790cb39c3eb8ca192942e5de0ed8622d2619"/>
+    <file path="000/248/722/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_84_bad.cpp" language="C++" size="4530" checksum="8a26d50bd5921320ef4d5de1d46b01ed885afb28">
+      <mixed line="137" name="CWE-078: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"/>
     </file>
     <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
-  </testcase>
-  <testcase id="61958" type="Source Code" status="Accepted" submissionDate="2013-05-20" language="C" author="NSA/Center for Assured Software" numberOfFiles="4" testsuiteid="86 108">
-    <description><![CDATA[CWE: 114 Process Control<br/> BadSource: connect_socket Read data using a connect socket (client side)<br/> GoodSource: Hard code the full pathname to the library<br/> Sink:<br/> BadSink : Load a dynamic link library<br/> Flow Variant: 21 Control flow: Flow controlled by value of a static global variable. All functions contained in one file.]]></description>
-    <file path="shared/108/std_testcase_io.h" language="C" size="1457" checksum="56de16829d5ac9d8086670ee5098217aa6694d26"/>
-    <file path="000/061/958/CWE114_Process_Control__w32_char_connect_socket_21.c" language="C" size="7715" checksum="1e0b2b18bd69e0ea62884b522ecb562b7f0b9681">
-      <mixed line="134" name="CWE-114: Process Control"/>
-    </file>
-    <file path="shared/108/io.c" language="C" size="5429" checksum="bcf531cb1922c03347031698c1c72eddadbf0d88"/>
-    <file path="shared/108/std_testcase.h" language="C" size="4004" checksum="d1801c64bc49d5d05fb3d55f7cc7e3a925c47e2f"/>
+    <file path="000/248/722/CWE78_OS_Command_Injection__wchar_t_listen_socket_w32_spawnvp_84_goodG2B.cpp" language="C++" size="1744" checksum="df4ffa6b9d3a4fa8cdb0f9f27b3bb0065eaf3ec8"/>
   </testcase>
 </container>
