@@ -1,1 +1,6 @@
-# Put our Python dependencies here
+jupyter==1.0.0
+matplotlib==3.1.0
+numpy==1.16.4
+pandas==0.24.2
+scipy==1.3.0
+seaborn==0.9.0
