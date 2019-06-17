@@ -9,8 +9,8 @@ docker pull djwj/uob-summer-project
 
 Then run the container via:
 
-  - `docker run --volume $PWD:/project --publish-all --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
-  - `docker run --volume $PWD:/project --publish-all --interactive --tty djwj/uob-summer-project /bin/bash` to get a Bash shell.
+  - `docker run --volume $PWD:/project --network host --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
+  - `docker run --volume $PWD:/project --network host --interactive --tty djwj/uob-summer-project /bin/bash` to get a Bash shell.
   
   
   ### Adding New Dependencies
