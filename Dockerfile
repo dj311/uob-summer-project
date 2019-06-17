@@ -30,4 +30,4 @@ RUN python3 -m pip install --requirement /tmp/requirements.txt
 # Run for a jupyter notebook by default
 WORKDIR "/project"
 EXPOSE 8888
-CMD ["jupyter", "notebook", "--allow-root"]
+CMD ["jupyter", "notebook", "--allow-root", "--ip", "0.0.0.0", "--no-browser"]
