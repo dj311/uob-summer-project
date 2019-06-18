@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     clang \
     git \
     llvm \
+    python-pip \
     python3 \
     python3-dev \
     python3-pip \
@@ -30,10 +31,17 @@ RUN cd /tmp && tar --extract --gz --file="snap-5.0.9-64-3.0-centos6.5-x64-py3.6.
 RUN cd /tmp/snap-5.0.0-64-3.0-centos6.5-x64-py3.6 && python3 setup.py install
 
 # Python dependencies. These are most likely to change, so go near the bottom.
-RUN python3 -m pip install --upgrade pip
+RUN python -m pip install --upgrade pip
+COPY requirements-py2.txt /tmp/
+RUN python -m pip install --requirement /tmp/requirements-py2.txt
 
-COPY requirements.txt /tmp/
-RUN python3 -m pip install --requirement /tmp/requirements.txt
+RUN python3 -m pip install --upgrade pip
+COPY requirements-py3.txt /tmp/
+RUN python3 -m pip install --requirement /tmp/requirements-py3.txt
+
+# Add python 2 as a kernel for jupyter
+RUN python -m pip install ipykernel
+RUN python -m ipykernel install
 
 # Run for a jupyter notebook by default
 WORKDIR "/project"
