@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     wget
 
-
 # python2 node2vec
 RUN git clone https://github.com/aditya-grover/node2vec.git
+RUN python -m pip install -r /node2vec/requirements.txt
 
 # python clang bindings
 RUN wget --output-document=/tmp/clang-source.tar.xz \
