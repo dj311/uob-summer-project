@@ -1,13 +1,22 @@
 FROM ubuntu:rolling
 
 RUN apt-get update && apt-get install -y \
-    wget \
-    llvm \
+    build-essential \
     clang \
+    git \
+    llvm \
     python3 \
-    python3-pip
+    python3-dev \
+    python3-pip \
+    swig \
+    unzip \
+    wget
 
-# Manually install the Python 3 clang bindings
+
+# python2 node2vec
+RUN git clone https://github.com/aditya-grover/node2vec.git
+
+# python clang bindings
 RUN wget --output-document=/tmp/clang-source.tar.xz \
     "http://releases.llvm.org/$(llvm-config --version)/cfe-$(llvm-config --version).src.tar.xz"
 RUN tar --extract --xz --file="/tmp/clang-source.tar.xz"
@@ -15,13 +24,12 @@ RUN mv "/cfe-$(llvm-config --version).src" "/clang-source"
 
 ENV PYTHONPATH "${PYTHONPATH}:/clang-source/bindings/python"
 
-# Manually install the SNAP python library for node2vec
+# snap-python (for node2vec)
 RUN cd /tmp && wget "http://snap.stanford.edu/snappy/release/beta/snap-5.0.9-64-3.0-centos6.5-x64-py3.6.tar.gz"
 RUN cd /tmp && tar --extract --gz --file="snap-5.0.9-64-3.0-centos6.5-x64-py3.6.tar.gz"
 RUN cd /tmp/snap-5.0.0-64-3.0-centos6.5-x64-py3.6 && python3 setup.py install
 
-# Install Python dependencies. These are most likely to change, so go
-# near the bottom of the file.
+# Python dependencies. These are most likely to change, so go near the bottom.
 RUN python3 -m pip install --upgrade pip
 
 COPY requirements.txt /tmp/
