@@ -4,12 +4,16 @@ Module with utility functions for working with and preprocessing source code.
 
 """
 
+import json
 import os
 import snap
-import json
+import subprocess
+import swifter
+import tempfile
 import clang.cindex
 import pandas as pd
-import subprocess
+
+from tqdm import tqdm
 
 # This cell might not be needed for you.
 clang.cindex.Config.set_library_file('/lib/x86_64-linux-gnu/libclang-8.so.1')
@@ -160,20 +164,31 @@ def code2vec(dataframe):
     Given a data set (e.g. juliet.csv.zip or vdisc_*.czv.gz) loaded in
     as a pandas dataframe, it applies the graph2vec embedding to the
     abstract syntax tree of each piece of source code. This is then
-    output into the file "../data/graph.csv".
+    output into the file "../data/graph_embeddings.csv".
     """
-    import pdb; pdb.set_trace()
-    # graphs is a dataframe containing dictionary format
-    graphs = dataframe.apply(process_for_graph2vec, axis='columns')
+    # preprocess our code so it can be used as an input into graph2vec
+    graphs = dataframe.swifter.apply(process_for_graph2vec, axis='columns')
 
-    for index, row in graphs.iteritems():
-        with open("../data/graph2vec_examples/" + str(index) + ".json", 'w') as f:
+    # make a temporary directory to put our graph2vec inputs into
+    tmp_directory = tempfile.TemporaryDirectory()
+
+    # save the graph2vec input into a file for each datapoint
+    for index, row in tqdm(graphs.iteritems()):
+        with open(tmp_directory.name + "/" + str(index) + ".json", 'w') as f:
             json.dump(row,f)
 
-    import pdb; pdb.set_trace()
+    # runs graph2vec on each of the above datapoints
+    subprocess.run([
+        "python3",
+        "/graph2vec/src/graph2vec.py",
+        "--input-path",
+        tmp_directory.name + "/",
+        "--output-path",
+        "../data/graph_embeddings.csv",
+    ])
 
-    subprocess.run(["python3", "../graph2vec/src/graph2vec.py", "--input-path", "../data/graph2vec_examples/", "--output-path", "../data/graph.csv"])
-
+    # cleanup the temp directory
+    tmp_directory.cleanup()
 
 
 if __name__=="__main__":

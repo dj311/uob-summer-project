@@ -12,4 +12,4 @@ texttable==1.5.0
 gensim==3.6.0
 networkx==1.11
 joblib==0.13.0
-
+swifter==0.289
