@@ -167,7 +167,7 @@ def code2vec(dataframe):
     output into the file "../data/graph_embeddings.csv".
     """
     # preprocess our code so it can be used as an input into graph2vec
-    graphs = dataframe.swifter.apply(process_for_graph2vec, axis='columns')
+    graphs = dataframe.apply(process_for_graph2vec, axis='columns')
 
     # make a temporary directory to put our graph2vec inputs into
     tmp_directory = tempfile.TemporaryDirectory()
