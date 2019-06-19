@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     swig \
     unzip \
+    vim \
     wget
 
 # python2 node2vec
