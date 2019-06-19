@@ -30,6 +30,10 @@ RUN cd /tmp && wget "http://snap.stanford.edu/snappy/release/beta/snap-5.0.9-64-
 RUN cd /tmp && tar --extract --gz --file="snap-5.0.9-64-3.0-centos6.5-x64-py3.6.tar.gz"
 RUN cd /tmp/snap-5.0.0-64-3.0-centos6.5-x64-py3.6 && python3 setup.py install
 
+# graph2vec
+# can be run via python3 /graph2vec/src/graph2vec.py <args>
+RUN git clone https://github.com/benedekrozemberczki/graph2vec.git
+
 # Python dependencies. These are most likely to change, so go near the bottom.
 RUN python -m pip install --upgrade pip
 COPY requirements-py2.txt /tmp/
