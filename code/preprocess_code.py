@@ -156,6 +156,12 @@ def process_for_graph2vec(datapoint):
 
 
 def code2vec(dataframe):
+    """
+    Given a data set (e.g. juliet.csv.zip or vdisc_*.czv.gz) loaded in
+    as a pandas dataframe, it applies the graph2vec embedding to the
+    abstract syntax tree of each piece of source code. This is then
+    output into the file "../data/graph.csv".
+    """
     import pdb; pdb.set_trace()
     # graphs is a dataframe containing dictionary format
     graphs = dataframe.apply(process_for_graph2vec, axis='columns')
