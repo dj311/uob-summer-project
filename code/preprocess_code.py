@@ -6,8 +6,10 @@ Module with utility functions for working with and preprocessing source code.
 
 import os
 import snap
+import json
 import clang.cindex
 import pandas as pd
+import subprocess
 
 # This cell might not be needed for you.
 clang.cindex.Config.set_library_file('/lib/x86_64-linux-gnu/libclang-8.so.1')
@@ -109,7 +111,7 @@ def generate_features(ast_root):
         in_degree = 1
         degree = out_degree + in_degree
 
-        features[node.identifier] = [degree, node.kind, node.displayname]
+        features[node.identifier] = [degree, str(node.kind), node.displayname]
 
         for child in node.children:
             walk_tree_and_set_features(child)
@@ -152,15 +154,19 @@ def process_for_graph2vec(datapoint):
 
     return graph2vec_representation
 
+
 def code2vec(dataframe):
-    print("doing code2vec")
+    import pdb; pdb.set_trace()
     # graphs is a dataframe containing dictionary format
-    graphs = dataframe.apply(process_for_graph2vec, axis = 'columns')
-    for index, row in graphs.iterrows():
-        with open("../data/graph2vec_examples/" + str(index) + ".json") as f:
+    graphs = dataframe.apply(process_for_graph2vec, axis='columns')
+
+    for index, row in graphs.iteritems():
+        with open("../data/graph2vec_examples/" + str(index) + ".json", 'w') as f:
             json.dump(row,f)
 
-    subprocess.run(["python", "../../graph2vec/src/graph2vec.py", "--input-path", "../data/graph2vec_examples/", "--output-path", "../data/graph.csv"])
+    import pdb; pdb.set_trace()
+
+    subprocess.run(["python3", "../graph2vec/src/graph2vec.py", "--input-path", "../data/graph2vec_examples/", "--output-path", "../data/graph.csv"])
 
 
 
