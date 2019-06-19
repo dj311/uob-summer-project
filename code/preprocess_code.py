@@ -160,7 +160,7 @@ if __name__=="__main__":
     preprocessed_example = convert_to_graph2vec(example)
 
     print("# Welcome ---------------------------------- #\n"
-          "Loaded in the first datapoin from juliet, and \n"
+          "Loaded in the first datapoint from juliet, and \n"
           "preprocessed it for the baseline model. The \n "
           "original is named 'example' and the output is \n"
           "named 'preprocessed_example'. \n"
