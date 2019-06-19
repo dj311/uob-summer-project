@@ -119,7 +119,7 @@ def generate_features(ast_root):
     return features
 
 
-def convert_to_graph2vec(datapoint):
+def process_for_graph2vec(datapoint):
     """
     Takes in a datapoint from juliet.csv.zip or vdisc_*.csv.gz (as
     loaded with pandas) and preprocesses it ready for the baseline
@@ -151,6 +151,17 @@ def convert_to_graph2vec(datapoint):
     }
 
     return graph2vec_representation
+
+def code2vec(dataframe):
+    print("doing code2vec")
+    # graphs is a dataframe containing dictionary format
+    graphs = dataframe.apply(process_for_graph2vec, axis = 'columns')
+    for index, row in graphs.iterrows():
+        with open("../data/graph2vec_examples/" + str(index) + ".json") as f:
+            json.dump(row,f)
+
+    subprocess.run(["python", "../../graph2vec/src/graph2vec.py", "--input-path", "../data/graph2vec_examples/", "--output-path", "../data/graph.csv"])
+
 
 
 if __name__=="__main__":
