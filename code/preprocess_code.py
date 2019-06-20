@@ -179,7 +179,7 @@ def code2vec(csv_location):
 
     graphs = pd.Series()
     chunk_num = 1
-    for chunk in pd.read_csv(csv_location, chunksize=1000):
+    for chunk in pd.read_csv(csv_location, chunksize=2000):
         print("  - Processing chunk {}".format(chunk_num))
 
         processed_chunk = chunk.apply(process_for_graph2vec, axis='columns')
