@@ -162,25 +162,44 @@ def process_for_graph2vec(datapoint):
     return graph2vec_representation
 
 
-def code2vec(dataframe):
+def code2vec(csv_location):
     """
     Given a data set (e.g. juliet.csv.zip or vdisc_*.czv.gz) loaded in
     as a pandas dataframe, it applies the graph2vec embedding to the
     abstract syntax tree of each piece of source code. This is then
     output into the file "../data/graph_embeddings.csv".
     """
-    # preprocess our code so it can be used as an input into graph2vec
-    graphs = dataframe.apply(process_for_graph2vec, axis='columns')
+    print("Preprocess our code so it can be used as an input into graph2vec.")
 
-    # make a temporary directory to put our graph2vec inputs into
+    graphs = pd.Series()
+    chunk_num = 1
+    for chunk in pd.read_csv(csv_location, chunksize=1000):
+        print("  - Processing chunk {}".format(chunk_num))
+
+        processed_chunk = chunk.apply(process_for_graph2vec, axis='columns')
+        processed_chunk.to_csv("../data/juliet_processed_for_graph2vec_chunk_{}.csv.gz".format(chunk_num))
+
+        graphs.append(processed_chunk, ignore_index=True)
+
+        chunk_num += 1
+        print("    `-> Done.")
+
+    print("`-> Done.")
+
+    print("Dataset pre-processed for graph2vec. Saving to file:")
+    graphs.to_csv("../data/juliet_processed_for_graph2vec.csv.gz")
+    print("`-> Saved.")
+
+    print("Making a temporary directory to put our graph2vec inputs into.")
     tmp_directory = tempfile.TemporaryDirectory()
 
-    # save the graph2vec input into a file for each datapoint
+    print("Save the graph2vec input into a file for each datapoint:")
     for index, row in tqdm(graphs.iteritems()):
         with open(tmp_directory.name + "/" + str(index) + ".json", 'w') as f:
             json.dump(row,f)
+    print("`-> Done.")
 
-    # runs graph2vec on each of the above datapoints
+    print("Runs graph2vec on each of the above datapoints")
     subprocess.run([
         "python3",
         "/graph2vec/src/graph2vec.py",
@@ -189,6 +208,7 @@ def code2vec(dataframe):
         "--output-path",
         "../data/graph_embeddings.csv",
     ])
+    print("`-> Done.")
 
     # cleanup the temp directory
     tmp_directory.cleanup()
