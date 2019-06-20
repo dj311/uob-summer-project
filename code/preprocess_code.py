@@ -162,7 +162,7 @@ def process_for_graph2vec(datapoint):
 
     # Explicitly delete clang objects
     del translation_unit
-    del translation_unit
+    del ast_root
     del index
 
     return graph2vec_representation
