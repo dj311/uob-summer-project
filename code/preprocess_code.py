@@ -5,6 +5,7 @@ source code.
 
 """
 
+import gc
 import json
 import os
 import snap
@@ -159,6 +160,11 @@ def process_for_graph2vec(datapoint):
         "features": features,
     }
 
+    # Explicitly delete clang objects
+    del translation_unit
+    del translation_unit
+    del index
+
     return graph2vec_representation
 
 
@@ -180,6 +186,9 @@ def code2vec(csv_location):
         processed_chunk.to_csv("../data/juliet_processed_for_graph2vec_chunk_{}.csv.gz".format(chunk_num))
 
         graphs.append(processed_chunk, ignore_index=True)
+
+        # Force the python gc to run
+        gc.collect()
 
         chunk_num += 1
         print("    `-> Done.")
