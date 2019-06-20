@@ -1,6 +1,7 @@
 """
 
-Module with utility functions for working with and preprocessing source code.
+Module with utility functions for working with and preprocessing
+source code.
 
 """
 
@@ -16,7 +17,9 @@ import pandas as pd
 from tqdm import tqdm
 
 # This cell might not be needed for you.
-clang.cindex.Config.set_library_file('/lib/x86_64-linux-gnu/libclang-8.so.1')
+clang.cindex.Config.set_library_file(
+    '/lib/x86_64-linux-gnu/libclang-8.so.1'
+)
 
 
 def snap_graph_from_clang_ast(ast_root):
