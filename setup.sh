@@ -1,11 +1,11 @@
 #! /usr/bin/env bash
 
-if [ "$*" == "--i-know-what-im-doing" ] then
+if [ "$*" == "--i-know-what-im-doing" ]; then
     echo "Run this script in root:"
     cd /
 
     echo "Install Ubuntu packages:"
-    xargs -a ubuntu-dependencies.txt apt install -y
+    xargs -a /project/ubuntu-dependencies.txt apt install -y
 
     echo "Install Python clang bindings:"
     wget --output-document=/tmp/clang-source.tar.xz \
@@ -20,21 +20,21 @@ if [ "$*" == "--i-know-what-im-doing" ] then
     cd /tmp/snap-5.0.0-64-3.0-centos6.5-x64-py3.6 && python3 setup.py install
 
     echo "Download the graph2vec source code:"
-    RUN git clone https://github.com/benedekrozemberczki/graph2vec.git
+    git clone https://github.com/benedekrozemberczki/graph2vec.git /graph2vec
 
     echo "Install Python 2 dependencies:"
     python -m pip install --upgrade pip
-    cp requirements-py2.txt /tmp/
+    cp /project/requirements-py2.txt /tmp/
     python -m pip install --requirement /tmp/requirements-py2.txt
 
     echo "Install Python 3 dependencies:"
     python3 -m pip install --upgrade pip
-    cp requirements-py3.txt /tmp/
+    cp /project/requirements-py3.txt /tmp/
     python3 -m pip install --requirement /tmp/requirements-py3.txt
 
     echo "Add python 2 as a kernel for jupyter"
-    RUN python -m pip install ipykernel
-    RUN python -m ipykernel install
+    python -m pip install ipykernel
+    python -m ipykernel install
 
 else
     echo "
