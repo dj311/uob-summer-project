@@ -1,18 +1,7 @@
 FROM ubuntu:rolling
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    clang \
-    git \
-    llvm \
-    python-pip \
-    python3 \
-    python3-dev \
-    python3-pip \
-    swig \
-    unzip \
-    vim \
-    wget
+# install ubuntu packages from file
+RUN apt-get update && xargs -a ubuntu-dependencies.txt apt-get install -y
 
 # python2 node2vec
 RUN git clone https://github.com/aditya-grover/node2vec.git
