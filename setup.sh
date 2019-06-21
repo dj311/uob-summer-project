@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-if [ "$*" == "$s2" ] then
+if [ "$*" == "--i-know-what-im-doing" ] then
     echo "Run this script in root:"
     cd /
 
