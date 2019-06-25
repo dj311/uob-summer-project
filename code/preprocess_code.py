@@ -1,8 +1,6 @@
 """
-
 Module with utility functions for working with and preprocessing
 source code.
-
 """
 
 import gc
@@ -52,11 +50,9 @@ def concretise_ast(node):
     Everytime you run .get_children() on a clang ast node, it
     gives you new objects. So if you want to modify those objects
     they will lose their changes everytime you walk the tree again.
-
     To avoid this problem, concretise_ast walks the tree once,
     saving the resulting list from .get_children() into a a concrete
     list inside the .children.
-
     You can then use .children to consistently walk over tree, and
     it will give you the same objects each time.
     """
@@ -183,9 +179,11 @@ def code2vec(csv_location):
         print("  - Processing chunk {}".format(chunk_num))
 
         processed_chunk = chunk.apply(process_for_graph2vec, axis='columns')
-        processed_chunk.to_csv("../data/juliet_processed_for_graph2vec_chunk_{}.csv.gz".format(chunk_num))
+        processed_chunk.to_csv("../data/juliet_processed_for_testsuite_chunk_{}.csv.gz".format(chunk_num))
 
-        graphs.append(processed_chunk, ignore_index=True)
+        graphs = graphs.append(processed_chunk, ignore_index=True)
+
+        # graphs = processed_chunk
 
         # Force the python gc to run
         gc.collect()
@@ -196,31 +194,29 @@ def code2vec(csv_location):
     print("`-> Done.")
 
     print("Dataset pre-processed for graph2vec. Saving to file:")
-    graphs.to_csv("../data/juliet_processed_for_graph2vec.csv.gz")
+    graphs.to_csv("../data/juliet_processed_for_testsuite.csv.gz")
     print("`-> Saved.")
 
     print("Making a temporary directory to put our graph2vec inputs into.")
-    tmp_directory = tempfile.TemporaryDirectory()
 
     print("Save the graph2vec input into a file for each datapoint:")
     for index, row in tqdm(graphs.iteritems()):
-        with open(tmp_directory.name + "/" + str(index) + ".json", 'w') as f:
+        with open('../data/testsuite' + "/" + str(index) + ".json", 'w') as f:
             json.dump(row,f)
     print("`-> Done.")
+
+    import pdb; pdb.set_trace()
 
     print("Runs graph2vec on each of the above datapoints")
     subprocess.run([
         "python3",
         "/graph2vec/src/graph2vec.py",
         "--input-path",
-        tmp_directory.name + "/",
+        "../data/testsuite" + "/",
         "--output-path",
         "../data/graph_embeddings.csv",
     ])
     print("`-> Done.")
-
-    # cleanup the temp directory
-    tmp_directory.cleanup()
 
 
 if __name__=="__main__":

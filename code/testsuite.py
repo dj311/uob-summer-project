@@ -1,7 +1,7 @@
 def test(data_path, model_name):
 
 	import preprocess_code
-	preprocess_code.code2vec(data_path, 100)
+	preprocess_code.code2vec(data_path)
 
 #Need to write in something in case above fails
 
@@ -18,6 +18,7 @@ def test(data_path, model_name):
 	import numpy as np
 	dataset = pd.read_csv(data_path)
 	y_tsuite = dataset.iloc[:,6:]
+
 	x_tsuite = pd.read_csv('../data/graphembeddings.csv')
 	x_tsuite = x_tsuite.drop(columns = 'type')
 	y_pred_tsuite = model.predict(x_tsuite)
