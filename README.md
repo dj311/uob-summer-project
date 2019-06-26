@@ -1,5 +1,7 @@
 # Summer Project
 
+**WARNING**: There's ~65,000 JSON files within the `./data/juliet_graph2vec/` folder. We need to clean this up, but in the meantime, clone with care!
+
 ## Development
 Use [Docker](https://www.docker.com/) to get a working development environment. The easiest way is to pull down the latest build from docker hub via:
 
