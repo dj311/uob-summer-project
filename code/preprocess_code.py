@@ -135,8 +135,8 @@ def process_for_graph2vec(datapoint):
     # Parse the source code with clang, and get out an ast:
     index = clang.cindex.Index.create()
     translation_unit = index.parse(
-        path=datapoint.filename,
-        unsaved_files=[(datapoint.filename, datapoint.code)],
+        path='file.cpp',
+        unsaved_files=[('file.cpp', datapoint.code)],
     )
     ast_root = translation_unit.cursor
 
