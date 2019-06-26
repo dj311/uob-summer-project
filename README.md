@@ -1,13 +1,16 @@
 # Summer Project
 
+**WARNING**: There's ~65,000 JSON files within the `./data/juliet_graph2vec/` folder. We need to clean this up, but in the meantime, clone with care!
+
 ## Development
+
 Use [Docker](https://www.docker.com/) to get a working development environment. The easiest way is to pull down the latest build from docker hub via:
 
 ```sh
 docker pull djwj/uob-summer-project
 ```
 
-Then run the container from the same directory as this file, via:
+The above Docker repo isn't public, but send dj311 a message (on Github) with your Docker Hub username and I'll give you permissions. Once the image is pulled,  run the container from the same directory as this file, via:
 
   - `docker run --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
   - `docker run --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project /bin/bash` to get a Bash shell.
