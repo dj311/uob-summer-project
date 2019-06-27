@@ -167,7 +167,7 @@ def process_for_graph2vec(datapoint):
     return json.dumps(graph2vec_representation)
 
 
-def code2vec(csv_location, output_location, npartitions=20):
+def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_workers=1):
     """
     Given a data set (e.g. juliet.csv.zip or vdisc_*.czv.gz) loaded in
     as a pandas dataframe, it applies the graph2vec embedding to the
@@ -213,6 +213,8 @@ def code2vec(csv_location, output_location, npartitions=20):
     subprocess.run([
         "python3",
         "/graph2vec/src/graph2vec.py",
+        "--workers",
+        num_graph2vec_workers,
         "--input-path",
         graph2vec_input_dir,
         "--output-path",
