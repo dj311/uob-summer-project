@@ -1,5 +1,6 @@
 # uob-summer-project
 env/
+data/juliet-dataset-c-and-cpp/testcases/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
