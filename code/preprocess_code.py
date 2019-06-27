@@ -214,7 +214,7 @@ def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_wor
         "python3",
         "/graph2vec/src/graph2vec.py",
         "--workers",
-        num_graph2vec_workers,
+        str(num_graph2vec_workers),
         "--input-path",
         graph2vec_input_dir,
         "--output-path",
