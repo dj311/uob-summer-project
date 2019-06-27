@@ -3,6 +3,7 @@ Module with utility functions for working with and preprocessing
 source code.
 """
 
+import clang.cindex
 import gc
 import json
 import os
@@ -10,7 +11,9 @@ import snap
 import subprocess
 import swifter
 import tempfile
-import clang.cindex
+
+import dask.dataframe as dd
+import numpy as np
 import pandas as pd
 
 from tqdm import tqdm
@@ -135,8 +138,8 @@ def process_for_graph2vec(datapoint):
     # Parse the source code with clang, and get out an ast:
     index = clang.cindex.Index.create()
     translation_unit = index.parse(
-        path=datapoint.filename,
-        unsaved_files=[(datapoint.filename, datapoint.code)],
+        path='file.cpp',
+        unsaved_files=[('file.cpp', datapoint.code)],
     )
     ast_root = translation_unit.cursor
 
@@ -161,10 +164,10 @@ def process_for_graph2vec(datapoint):
     del ast_root
     del index
 
-    return graph2vec_representation
+    return json.dumps(graph2vec_representation)
 
 
-def code2vec(csv_location):
+def code2vec(csv_location, output_location):
     """
     Given a data set (e.g. juliet.csv.zip or vdisc_*.czv.gz) loaded in
     as a pandas dataframe, it applies the graph2vec embedding to the
@@ -173,50 +176,51 @@ def code2vec(csv_location):
     """
     print("Preprocess our code so it can be used as an input into graph2vec.")
 
-    graphs = pd.Series()
-    chunk_num = 1
-    for chunk in pd.read_csv(csv_location, chunksize=2000):
-        print("  - Processing chunk {}".format(chunk_num))
+    data = pd.read_csv(csv_location)
+    data = dd.from_pandas(data, npartitions=60)
 
-        processed_chunk = chunk.apply(process_for_graph2vec, axis='columns')
-        processed_chunk.to_csv("../data/juliet_processed_for_testsuite_chunk_{}.csv.gz".format(chunk_num))
+    graphs = data.apply(
+        process_for_graph2vec,
+        axis='columns',
+        meta=('processed_for_graph2vec', 'unicode'),
+    )
 
-        graphs = graphs.append(processed_chunk, ignore_index=True)
+    print("`-> Finished prepping data for graph2vec.")
 
-        # graphs = processed_chunk
+    # Make a temporary directory to put our graph2vec inputs into
+    tmp_directory = tempfile.TemporaryDirectory()
 
-        # Force the python gc to run
-        gc.collect()
-
-        chunk_num += 1
-        print("    `-> Done.")
-
-    print("`-> Done.")
-
-    print("Dataset pre-processed for graph2vec. Saving to file:")
-    graphs.to_csv("../data/juliet_processed_for_testsuite.csv.gz")
-    print("`-> Saved.")
+    # print("Dataset pre-processed for graph2vec. Saving to file:")
+    # graphs.to_csv(tmp_directory.name + "/juliet_ready_for_graph2vec.csv.gz")
+    # print("`-> Saved.")
 
     print("Making a temporary directory to put our graph2vec inputs into.")
 
+
+    graph2vec_input_dir = tmp_directory.name + "/graph2vec_input/"
+    os.makedirs(graph2vec_input_dir, exist_ok=True)
+
     print("Save the graph2vec input into a file for each datapoint:")
-    for index, row in tqdm(graphs.iteritems()):
-        with open('../data/testsuite' + "/" + str(index) + ".json", 'w') as f:
-            json.dump(row,f)
+    for index, row in graphs.iteritems():
+        print("Current Iteration: "+str(index))
+        with open(graph2vec_input_dir + str(index) + ".json", 'w') as f:
+            f.write(row)
+
     print("`-> Done.")
 
-    import pdb; pdb.set_trace()
 
     print("Runs graph2vec on each of the above datapoints")
     subprocess.run([
         "python3",
         "/graph2vec/src/graph2vec.py",
         "--input-path",
-        "../data/testsuite" + "/",
+        graph2vec_input_dir,
         "--output-path",
-        "../data/graph_embeddings.csv",
+        output_location,
     ])
     print("`-> Done.")
+
+    tmp_directory.cleanup()
 
 
 if __name__=="__main__":

@@ -5,12 +5,12 @@ def test(data_path, model_name):
 
 #Need to write in something in case above fails
 
-# baseline model is called 'baseline-model'
+# baseline model is called 'baseline.model'
 
 	import pickle
 	import keras
 	import tensorflow
-	infile = open(model_name, 'rb')
+	infile = open('../data/' + model_name, 'rb')
 	model_tsuite = pickle.load(infile)
 	infile.close()
 	
