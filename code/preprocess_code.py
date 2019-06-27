@@ -128,18 +128,24 @@ def generate_features(ast_root):
     return features
 
 
-def process_for_graph2vec(datapoint):
+def process_for_graph2vec(testcase):
     """
-    Takes in a datapoint from juliet.csv.zip or vdisc_*.csv.gz (as
-    loaded with pandas) and preprocesses it ready for the baseline
-    model.
+    Takes in a list of files/datapoints from juliet.csv.zip or
+    vdisc_*.csv.gz (as loaded with pandas) matching one particular
+    testcase, and preprocesses it ready for the baseline model.
     """
+    parse_list = [
+        (datapoint.filename, datapoint.code)
+        for datapoint in testcase
+    ]
+
+    primary, rest = find_primary_source_file(testcase)
 
     # Parse the source code with clang, and get out an ast:
     index = clang.cindex.Index.create()
     translation_unit = index.parse(
-        path='file.cpp',
-        unsaved_files=[('file.cpp', datapoint.code)],
+        path=primary.filename,
+        unsaved_files=parse_list,
     )
     ast_root = translation_unit.cursor
 
@@ -151,7 +157,7 @@ def process_for_graph2vec(datapoint):
     # Next, construct an edge list for the graph2vec input:
     edgelist = generate_edgelist(ast_root)
 
-    # Construct a list of featurs for each node
+    # Construct a list of features for each node
     features = generate_features(ast_root)
 
     graph2vec_representation = {
@@ -165,6 +171,37 @@ def process_for_graph2vec(datapoint):
     del index
 
     return json.dumps(graph2vec_representation)
+
+
+def find_primary_source_file(datapoints):
+    """
+    Given a list of datapoints representing the files for a single
+    testcase, try to find which of the files is the "primary"
+    file.
+
+    According to the Juliet documentation, this should be the
+    only file which defines the main function.
+
+    In contrast, there is only ever one piece of code in the
+    vdisc dataset.
+    """
+
+    if len(datapoints) == 1:
+        # VDISC case and some of Juliet
+        return datapoints[0], []
+
+    elif len(datapoints) > 1:
+        # Juliet only case
+        rest = []
+
+        for datapoint in datapoints:
+            for line in datapoint.code.split("\n"):
+                if line.startswith("int main("):
+                    primary = datapoint
+                else:
+                    rest.append(datapoint)
+
+        return primary, rest
 
 
 def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_workers=1):
