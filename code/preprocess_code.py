@@ -177,7 +177,7 @@ def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_wor
     print("Preprocess our code so it can be used as an input into graph2vec.")
 
     data = pd.read_csv(csv_location)
-    data = dd.from_pandas(data, npartitions=npartitions)
+    data = dd.from_pandas(data, npartitions=num_partitions)
 
     graphs = data.apply(
         process_for_graph2vec,
