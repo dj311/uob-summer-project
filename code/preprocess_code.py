@@ -128,7 +128,7 @@ def generate_features(ast_root):
     return features
 
 
-def process_for_graph2vec(testcase):
+def process_for_graph2vec(testcase, **kwargs):
     """
     Takes in a list of files/datapoints from juliet.csv.zip or
     vdisc_*.csv.gz (as loaded with pandas) matching one particular
@@ -139,7 +139,7 @@ def process_for_graph2vec(testcase):
         for datapoint in testcase.itertuples()
     ]
 
-    primary, _ = find_primary_source_file(testcase)
+    primary = find_primary_source_file(testcase)
 
     # Parse the source code with clang, and get out an ast:
     index = clang.cindex.Index.create()

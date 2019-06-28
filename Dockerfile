@@ -1,7 +1,8 @@
 FROM ubuntu:rolling
 
 # install ubuntu packages from file
-RUN apt-get update && xargs -a ubuntu-dependencies.txt apt-get install -y
+COPY ubuntu-dependencies.txt /tmp/
+RUN apt-get update && xargs -a /tmp/ubuntu-dependencies.txt apt-get install -y
 
 # python2 node2vec
 RUN git clone https://github.com/aditya-grover/node2vec.git
@@ -23,6 +24,14 @@ RUN cd /tmp/snap-5.0.0-64-3.0-centos6.5-x64-py3.6 && python3 setup.py install
 # graph2vec
 # can be run via python3 /graph2vec/src/graph2vec.py <args>
 RUN git clone https://github.com/benedekrozemberczki/graph2vec.git
+
+# Prolog and ILP
+RUN git clone --depth 1 https://github.com/vscosta/yap-6.3 /yap
+RUN mkdir /yap/build && cd /yap/build && cmake ../ && make && make install
+
+RUN mkdir /aleph && wget --output-document=/aleph/aleph.pl \
+         "http://www.comlab.ox.ac.uk/oucl/research/areas/machlearn/Aleph/aleph.pl"
+RUN git clone --depth 1 https://github.com/metagol/metagol.git /metagol
 
 # Python dependencies. These are most likely to change, so go near the bottom.
 RUN python -m pip install --upgrade pip

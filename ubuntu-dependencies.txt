@@ -10,3 +10,5 @@ swig
 unzip
 vim
 wget
+swi-prolog
+cmake
