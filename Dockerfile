@@ -1,7 +1,8 @@
 FROM ubuntu:rolling
 
 # install ubuntu packages from file
-RUN apt-get update && xargs -a ubuntu-dependencies.txt apt-get install -y
+COPY ubuntu-dependencies.txt /tmp/
+RUN apt-get update && xargs -a /tmp/ubuntu-dependencies.txt apt-get install -y
 
 # python2 node2vec
 RUN git clone https://github.com/aditya-grover/node2vec.git
