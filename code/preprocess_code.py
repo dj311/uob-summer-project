@@ -136,10 +136,10 @@ def process_for_graph2vec(testcase):
     """
     parse_list = [
         (datapoint.filename, datapoint.code)
-        for datapoint in testcase
+        for datapoint in testcase.itertuples()
     ]
 
-    primary, rest = find_primary_source_file(testcase)
+    primary, _ = find_primary_source_file(testcase)
 
     # Parse the source code with clang, and get out an ast:
     index = clang.cindex.Index.create()
@@ -188,23 +188,19 @@ def find_primary_source_file(datapoints):
 
     if len(datapoints) == 1:
         # VDISC case and some of Juliet
-        return datapoints[0], []
+        return datapoints.iloc[0]
 
     elif len(datapoints) > 1:
         # Juliet only case
-        rest = []
-
-        for datapoint in datapoints:
+        for datapoint in datapoints.itertuples():
             for line in datapoint.code.split("\n"):
                 if line.startswith("int main("):
                     primary = datapoint
-                else:
-                    rest.append(datapoint)
 
-        return primary, rest
+        return primary
 
 
-def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_workers=1):
+def preprocess_all_for_graph2vec(csv_location, output_location, num_partitions=20):
     """
     Given a data set (e.g. juliet.csv.zip or vdisc_*.czv.gz) loaded in
     as a pandas dataframe, it applies the graph2vec embedding to the
@@ -216,16 +212,13 @@ def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_wor
     data = pd.read_csv(csv_location)
     data = dd.from_pandas(data, npartitions=num_partitions)
 
-    graphs = data.apply(
+    graphs = data.groupby(['testcase_ID']).apply(
         process_for_graph2vec,
         axis='columns',
         meta=('processed_for_graph2vec', 'unicode'),
     )
 
     print("`-> Finished prepping data for graph2vec.")
-
-    # Make a temporary directory to put our graph2vec inputs into
-    tmp_directory = tempfile.TemporaryDirectory()
 
     # print("Dataset pre-processed for graph2vec. Saving to file:")
     # graphs.to_csv(tmp_directory.name + "/juliet_ready_for_graph2vec.csv.gz")
@@ -234,10 +227,11 @@ def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_wor
     print("Making a temporary directory to put our graph2vec inputs into.")
 
 
-    graph2vec_input_dir = tmp_directory.name + "/graph2vec_input/"
+    graph2vec_input_dir = output_location + "/graph2vec_input/"
     os.makedirs(graph2vec_input_dir, exist_ok=True)
 
     print("Save the graph2vec input into a file for each datapoint:")
+
     for index, row in graphs.iteritems():
         print("Current Iteration: "+str(index))
         with open(graph2vec_input_dir + str(index) + ".json", 'w') as f:
@@ -245,7 +239,10 @@ def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_wor
 
     print("`-> Done.")
 
+    return graph2vec_input_dir
 
+
+def run_graph2vec(input_dir, output_location, num_graph2vec_workers=1):
     print("Runs graph2vec on each of the above datapoints")
     subprocess.run([
         "python3",
@@ -253,13 +250,11 @@ def code2vec(csv_location, output_location, num_partitions=20, num_graph2vec_wor
         "--workers",
         str(num_graph2vec_workers),
         "--input-path",
-        graph2vec_input_dir,
+        input_dir,
         "--output-path",
         output_location,
     ])
     print("`-> Done.")
-
-    tmp_directory.cleanup()
 
 
 if __name__=="__main__":
