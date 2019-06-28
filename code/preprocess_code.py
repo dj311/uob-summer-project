@@ -139,7 +139,7 @@ def process_for_graph2vec(testcase, **kwargs):
         for datapoint in testcase.itertuples()
     ]
 
-    primary, _ = find_primary_source_file(testcase)
+    primary = find_primary_source_file(testcase)
 
     # Parse the source code with clang, and get out an ast:
     index = clang.cindex.Index.create()
