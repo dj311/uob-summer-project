@@ -12,3 +12,4 @@ vim
 wget
 swi-prolog
 cmake
+openjdk-8-jdk

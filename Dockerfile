@@ -7,6 +7,10 @@ RUN apt-get update && xargs -a /tmp/ubuntu-dependencies.txt apt-get install -y
 # python2 node2vec
 RUN git clone https://github.com/aditya-grover/node2vec.git
 RUN python -m pip install -r /node2vec/requirements.txt
+# add scala build tool (needed for building joern)
+RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+RUN apt-get update && apt-get install -y sbt
 
 # python clang bindings
 RUN wget --output-document=/tmp/clang-source.tar.xz \
@@ -24,6 +28,10 @@ RUN cd /tmp/snap-5.0.0-64-3.0-centos6.5-x64-py3.6 && python3 setup.py install
 # graph2vec
 # can be run via python3 /graph2vec/src/graph2vec.py <args>
 RUN git clone https://github.com/benedekrozemberczki/graph2vec.git
+
+# joern
+RUN git clone https://github.com/ShiftLeftSecurity/joern.git /joern
+RUN cd joern && sbt stage
 
 # Prolog and ILP
 RUN git clone --depth 1 https://github.com/vscosta/yap-6.3 /yap
