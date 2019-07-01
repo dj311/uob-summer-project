@@ -13,4 +13,4 @@ gensim==3.6.0
 networkx==1.11
 joblib==0.13.0
 swifter==0.289
-sklearn==0.21.2
+sklearn==0.0
