@@ -1,4 +1,4 @@
-:- use_module('metagol').
+:- use_module(library(metagol)).
 
 
 %% metagol settings
