@@ -33,6 +33,9 @@ RUN mkdir /aleph && wget --output-document=/aleph/aleph.pl \
          "http://www.comlab.ox.ac.uk/oucl/research/areas/machlearn/Aleph/aleph.pl"
 RUN git clone --depth 1 https://github.com/metagol/metagol.git /metagol
 
+# Add metagol to swi-prolog path
+COPY .swiplrc /root/.swiplrc
+
 # Python dependencies. These are most likely to change, so go near the bottom.
 RUN python -m pip install --upgrade pip
 COPY requirements-py2.txt /tmp/
