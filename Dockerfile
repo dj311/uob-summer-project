@@ -52,4 +52,4 @@ RUN python -m ipykernel install
 # Run for a jupyter notebook by default
 WORKDIR "/project"
 EXPOSE 8888
-CMD ["jupyter", "notebook", "--allow-root", "--ip", "0.0.0.0", "--no-browser"]
+CMD /joern/joernd & jupyter notebook --allow-root --ip 0.0.0.0 --no-browser
