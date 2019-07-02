@@ -1,6 +1,3 @@
-/* APACHE from https://github.com/shiftleftsecurity/joern/ */
-/* TODO: license properly */
-
 import gremlin.scala._
 import io.shiftleft.codepropertygraph.generated._
 import java.nio.file.Paths
@@ -8,33 +5,65 @@ import io.shiftleft.queryprimitives.utils.ExpandTo
 import org.apache.tinkerpop.gremlin.structure.Direction
 import io.shiftleft.queryprimitives.steps.Implicits.JavaIteratorDeco
 import javax.script.ScriptEngineManager
+import scala.io.Source
+
+/* APACHE from https://github.com/shiftleftsecurity/joern/ */
+/* TODO: license properly */
+
 
 /** Some helper functions: adapted from ReachingDefPass.scala in codeproperty graph repo */
-def vertexToStr(vertex: Vertex): String = {
+def vertexToStr(vertex: Vertex, identifiers: Map[Vertex,Int]): String = {
   try {
     val methodVertex = vertex.vertices(Direction.IN, "CONTAINS").nextChecked
     val fileName = methodVertex.vertices(Direction.IN, "CONTAINS").nextChecked match {
       case file: nodes.File => file.asInstanceOf[nodes.File].name
       case _ => "NA"
     }
-
-    s"${Paths.get(fileName).getFileName.toString}: ${vertex.value2(NodeKeys.LINE_NUMBER).toString} ${vertex.value2(NodeKeys.CODE)}"
-  } catch { case _: Exception => "" }
+    val filename_temp = Paths.get(fileName).getFileName.toString
+    val newfile_name = filename_temp.replaceAll("CWE.*__CWE[0-9]+_", "").replaceAll("\\.", "_")
+    s"${identifiers(vertex).toString}_${newfile_name}_${vertex.value2(NodeKeys.LINE_NUMBER).toString}_${vertex.value2(NodeKeys.COLUMN_NUMBER).toString}"
+  } catch { case _: Exception => identifiers(vertex).toString }
 }
 
 def toProlog(graph: ScalaGraph): String = {
-  val buf = new StringBuffer()
+  var vertex_identifiers:Map[Vertex,Int] = Map()
 
-  buf.append("# START: Generated Prolog ")
-
-  graph.E.hasLabel("AST").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex).replace("\"", "\'")
-    val childVertex = vertexToStr(e.outVertex).replace("\"", "\'")
-    buf.append(s"""ast("$parentVertex", "$childVertex").\n """)  /* ast(parent, chlid). */
+  var index = 0
+  graph.V.l.foreach{ v =>
+    vertex_identifiers += (v -> index)
+    index += 1
   }
 
-  buf.append("# END: Generated Prolog ")
+  val buf = new StringBuffer()
+
+  buf.append("% START: Generated Prolog\n")
+
+  buf.append("% AST\n")
+  graph.E.hasLabel("AST").l.foreach { e =>
+    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    buf.append(s"""ast($parentVertex, $childVertex).\n """)  /* ast(parent, chlid). */
+  }
+
+  buf.append("% CFG\n")
+  graph.E.hasLabel("CFG").l.foreach { e =>
+    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    buf.append(s"""cfg($parentVertex, $childVertex).\n """)  /* ast(parent, chlid). */
+  }
+
+  buf.append("% PDG\n")
+  graph.E.hasLabel("PDG").l.foreach { e =>
+    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    buf.append(s"""pdg($parentVertex, $childVertex).\n """)  /* ast(parent, chlid). */
+  }
+
+  buf.append("% END: Generated Prolog ")
+  
   buf.toString
 }
 
 toProlog(cpg.graph)
+
+/* read bug_names */
