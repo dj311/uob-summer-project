@@ -1,5 +1,7 @@
 # Summer Project
 
+Work in progress.
+
 **WARNING**: There's ~65,000 JSON files within the `./data/juliet_graph2vec/` folder. We need to clean this up, but in the meantime, clone with care!
 
 ## Development
