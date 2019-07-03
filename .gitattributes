@@ -4,5 +4,6 @@ data/vdisc_validate.csv.gz filter=lfs diff=lfs merge=lfs -text
 data/juliet_split.csv.gz filter=lfs diff=lfs merge=lfs -text
 data/buffer_overflow_graph_embeddings.csv.gz filter=lfs diff=lfs merge=lfs -text
 data/buffer_overflow_graph2vec_inputs.tar.gz filter=lfs diff=lfs merge=lfs -text
+data/ilp_prolog_data.csv.gz filter=lfs diff=lfs merge=lfs -text
 data/* filter=lfs diff=lfs merge=lfs -text
 images/* filter=lfs diff=lfs merge=lfs -text
