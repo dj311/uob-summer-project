@@ -40,30 +40,21 @@ def toProlog(graph: ScalaGraph): String = {
 
   buf.append("% AST\n")
   graph.E.hasLabel("AST").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
-    buf.append(s"""ast($parentVertex, $childVertex).\n """)  /* ast(parent, chlid). */
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
+    buf.append(s"""ast($parentVertex, $childVertex).\n """)
   }
 
   buf.append("% CFG\n")
   graph.E.hasLabel("CFG").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
-    buf.append(s"""cfg($parentVertex, $childVertex).\n """)  /* ast(parent, chlid). */
-  }
-
-  buf.append("% PDG\n")
-  graph.E.hasLabel("PDG").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
-    buf.append(s"""pdg($parentVertex, $childVertex).\n """)  /* ast(parent, chlid). */
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
+    buf.append(s"""cfg($parentVertex, $childVertex).\n """)
   }
 
   buf.append("% END: Generated Prolog ")
-  
+
   buf.toString
 }
 
 toProlog(cpg.graph)
-
-/* read bug_names */

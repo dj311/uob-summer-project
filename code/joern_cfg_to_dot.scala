@@ -42,8 +42,8 @@ def toDot(graph: ScalaGraph): String = {
   buf.append("{\n")
   buf.append("  edge[color=green3,constraint=true]\n")
   graph.E.hasLabel("AST").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""  $parentVertex -> $childVertex \n """)
   }
   buf.append("}\n")
@@ -52,8 +52,8 @@ def toDot(graph: ScalaGraph): String = {
   buf.append("{\n")
   buf.append("edge[color=red3,constraint=true]\n")
   graph.E.hasLabel("CFG").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""  $parentVertex -> $childVertex \n """)
   }
   buf.append("}\n")
@@ -62,8 +62,8 @@ def toDot(graph: ScalaGraph): String = {
   buf.append("{\n")
   buf.append("edge[color=purple3,constraint=true]\n")
   graph.E.hasLabel("REF").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""  $parentVertex -> $childVertex \n """)
   }
   buf.append("}\n")
@@ -72,8 +72,8 @@ def toDot(graph: ScalaGraph): String = {
   // buf.append("{\n")
   // buf.append("edge[color=orangered1,constraint=true]\n")
   // graph.E.hasLabel("EVAL_TYPE").l.foreach { e =>
-  //   val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-  //   val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    // val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    // val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
   //   buf.append(s"""  $parentVertex -> $childVertex \n """)
   // }
   // buf.append("}\n")
@@ -82,8 +82,8 @@ def toDot(graph: ScalaGraph): String = {
   buf.append("{\n")
   buf.append("edge[color=blue1,constraint=true]\n")
   graph.E.hasLabel("CALL").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""  $parentVertex -> $childVertex \n """)
   }
   buf.append("}\n")
@@ -92,8 +92,8 @@ def toDot(graph: ScalaGraph): String = {
   buf.append("{\n")
   buf.append("edge[color=yellow2,constraint=true]\n")
   graph.E.hasLabel("VTABLE").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""  $parentVertex -> $childVertex \n """)
   }
   buf.append("}\n")
@@ -102,8 +102,8 @@ def toDot(graph: ScalaGraph): String = {
   buf.append("{\n")
   buf.append("edge[color=violetred2,constraint=true]\n")
   graph.E.hasLabel("INHERITS_FROM").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""  $parentVertex -> $childVertex \n """)
   }
   buf.append("}\n")
@@ -112,8 +112,8 @@ def toDot(graph: ScalaGraph): String = {
   buf.append("{\n")
   buf.append("edge[color=grey37,constraint=true]\n")
   graph.E.hasLabel("BINDS_TO").l.foreach { e =>
-    val parentVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
-    val childVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""  $parentVertex -> $childVertex \n """)
   }
   buf.append("}\n")
