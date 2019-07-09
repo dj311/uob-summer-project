@@ -69,7 +69,7 @@ def toProlog(graph: ScalaGraph): String = {
         case "ALLOCA" =>
           buf.append("alloc(" + vertex_str + ").\n")
         case "malloc" =>
-          buf.append("malloc(" + vertex_str + ").\n")
+          buf.append("alloc(" + vertex_str + ").\n")
         case "memcopy" =>
           buf.append("writeToPointer(" + vertex_str + ").\n")
         case "memmove" =>
