@@ -1,3 +1,4 @@
+import scala.util.Try
 import gremlin.scala._
 import io.shiftleft.codepropertygraph.generated._
 import java.nio.file.Paths
@@ -13,7 +14,13 @@ import scala.io.Source
 
 /** Some helper functions: adapted from ReachingDefPass.scala in codeproperty graph repo */
 def vertexToStr(vertex: Vertex, identifiers: Map[Vertex,Int]): String = {
-  try {
+  val str = new StringBuffer()
+
+  str.append("id_")
+  str.append(identifiers(vertex).toString + "_")
+
+  str.append("f_")
+  Try {
     val methodVertex = vertex.vertices(Direction.IN, "CONTAINS").nextChecked
     val fileName = methodVertex.vertices(Direction.IN, "CONTAINS").nextChecked match {
       case file: nodes.File => file.asInstanceOf[nodes.File].name
@@ -21,8 +28,21 @@ def vertexToStr(vertex: Vertex, identifiers: Map[Vertex,Int]): String = {
     }
     val filename_temp = Paths.get(fileName).getFileName.toString
     val newfile_name = filename_temp.replaceAll("CWE.*__CWE[0-9]+_", "").replaceAll("\\.", "_")
-    s"${identifiers(vertex).toString}_${newfile_name}_${vertex.value2(NodeKeys.LINE_NUMBER).toString}_${vertex.value2(NodeKeys.COLUMN_NUMBER).toString}"
-  } catch { case _: Exception => identifiers(vertex).toString }
+
+    str.append(newfile_name + "_")
+  }
+
+  str.append("l_")
+  Try {
+    str.append(vertex.value2(NodeKeys.LINE_NUMBER).toString + "_")
+  }
+
+  str.append("c_")
+  Try {
+    str.append(vertex.value2(NodeKeys.COLUMN_NUMBER).toString + "_")
+  }
+
+  str.toString
 }
 
 def toProlog(graph: ScalaGraph): String = {
@@ -37,6 +57,20 @@ def toProlog(graph: ScalaGraph): String = {
   val buf = new StringBuffer()
 
   buf.append("% START: Generated Prolog\n")
+
+  buf.append("% CODE\n")
+  graph.V.l.foreach{ v =>
+    Try {
+      buf.append(
+        "source_code("
+          + vertexToStr(v, vertex_identifiers)
+          + ", \""
+          + v.value2(NodeKeys.CODE).toString
+          + "\")."
+          + "\n"
+      )
+    }
+  }
 
   buf.append("% AST\n")
   graph.E.hasLabel("AST").l.foreach { e =>
