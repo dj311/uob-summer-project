@@ -58,6 +58,32 @@ def toProlog(graph: ScalaGraph): String = {
 
   buf.append("% START: Generated Prolog\n")
 
+  buf.append("% NODE PROPERTIES \n")
+  graph.V.l.foreach{ v =>
+    val vertex_str = vertexToStr(v, vertex_identifiers)
+
+    Try {
+      val node_name = v.value2(NodeKeys.NAME).toString
+
+      node_name match {
+        case "ALLOCA" =>
+          buf.append("alloc(" + vertex_str + ").\n")
+        case "malloc" =>
+          buf.append("malloc(" + vertex_str + ").\n")
+        case "memcopy" =>
+          buf.append("writeToPointer(" + vertex_str + ").\n")
+        case "memmove" =>
+          buf.append("writeToPointer(" + vertex_str + ").\n")
+        case "<operator>.sizeOf" =>
+          buf.append("sizeOf(" + vertex_str + ").\n")
+        case "<operator>.assignment" =>
+          buf.append("assignment(" + vertex_str + ").\n")
+        case "<operator>.computedMemberAccess" =>
+          buf.append("compMemberAccess(" + vertex_str + ").\n")
+      }
+    }
+  }
+
   buf.append("% CODE\n")
   graph.V.l.foreach{ v =>
     Try {
