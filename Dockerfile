@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM ubuntu:cosmic
 
 # install ubuntu packages from file
 COPY ubuntu-dependencies.txt /tmp/
@@ -36,6 +36,16 @@ RUN git clone --depth 1 https://github.com/metagol/metagol.git /metagol
 # Add metagol to swi-prolog path
 COPY .swiplrc /root/.swiplrc
 
+# Progol
+RUN mkdir /progol
+RUN wget --output-document=/progol/progol5_0.tar.gz \
+    "https://www.doc.ic.ac.uk/~shm/Software/progol5.0/progol5_0.tar.gz"
+RUN wget --output-document=/progol/expand.sh \
+    "https://www.doc.ic.ac.uk/~shm/Software/progol5.0/expand.sh"
+RUN cd /progol && gunzip progol5_0.tar.gz && tar xvf progol5_0.tar
+RUN cd /progol/source && make CC=gcc-4.8
+RUN cd /progol/source && make CC=gcc-4.8 qsample
+
 # Python dependencies. These are most likely to change, so go near the bottom.
 RUN python -m pip install --upgrade pip
 COPY requirements-py2.txt /tmp/
@@ -52,4 +62,4 @@ RUN python -m ipykernel install
 # Run for a jupyter notebook by default
 WORKDIR "/project"
 EXPOSE 8888
-CMD /joern/joernd & jupyter notebook --allow-root --ip 0.0.0.0 --no-browser
+CMD jupyter notebook --allow-root --ip 0.0.0.0 --no-browser

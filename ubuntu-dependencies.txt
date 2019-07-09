@@ -14,3 +14,4 @@ swi-prolog
 cmake
 openjdk-8-jdk
 graphviz
+gcc-4.8
