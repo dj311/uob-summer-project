@@ -111,6 +111,12 @@ def toProlog(graph: ScalaGraph): String = {
     val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
     buf.append(s"""cfg($parentVertex, $childVertex).\n """)
   }
+  buf.append("% REF\n")
+  graph.E.hasLabel("REF").l.foreach { e =>
+    val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
+    val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
+    buf.append(s"""ref($parentVertex, $childVertex).\n """)
+  }
 
   buf.append("% END: Generated Prolog ")
 
