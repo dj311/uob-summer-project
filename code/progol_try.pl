@@ -1,21 +1,21 @@
 
 % Settings
-%:- set(c,100)?
-%:- set(i,100)?
+:- set(c,10)?
+:- set(i,3)?
 :- set(h,100)?
 %:- set(noise,0.5)?
 :- set(posonly)?
-
+:- set(r,10000)?
 
 % Mode declarations
 :- modeh(*, bug(+node))?
-/*
+
 :- modeb(*, ast(+node,-node))?
 :- modeb(*, ast(-node,+node))?
 
 :- modeb(*, cfg(+node,-node))?
 :- modeb(*, cfg(-node,+node))?
-*/
+
 :- modeb(*, ref(+node,-node))?
 :- modeb(*, ref(-node,+node))?
 
@@ -26,12 +26,12 @@
 :- modeb(*, alloc(+node))?
 :- modeb(*, writeToPointer(+node))?
 
-:- modeb(*, assignment(-node))?
-:- modeb(*, compMemberAccess(-node))?
-:- modeb(*, sizeOf(-node))?
-:- modeb(*, malloc(-node))?
-:- modeb(*, alloc(-node))?
-:- modeb(*, writeToPointer(-node))?
+%:- modeb(*, assignment(-node))?
+%:- modeb(*, compMemberAccess(-node))?
+%:- modeb(*, sizeOf(-node))?
+%:- modeb(*, malloc(-node))?
+%:- modeb(*, alloc(-node))?
+%:- modeb(*, writeToPointer(-node))?
 
 
 %% Types
@@ -755,7 +755,7 @@ alloc(id_163_f_memcpy_01_c_l_25_c_18_).
 assignment(id_168_f_memcpy_01_c_l_25_c_4_).
 assignment(id_171_f_l_c_).
 assignment(id_172_f_memcpy_01_c_l_23_c_4_).
-/*
+
 % AST
 ast(id_185_f_l_c_, id_91_f_l_c_).
 ast(id_185_f_l_c_, id_90_f_l_c_).
@@ -918,7 +918,7 @@ ast(id_176_f_l_21_c_0_, id_174_f_memcpy_01_c_l_22_c_0_).
 ast(id_176_f_l_21_c_0_, id_175_f_l_21_c_0_).
 ast(id_183_f_l_c_, id_176_f_l_21_c_0_).
 
-% CFG
+%cfg
 cfg(id_102_f_memcpy_01_c_l_56_c_4_, id_118_f_l_48_c_0_).
 cfg(id_101_f_memcpy_01_c_l_56_c_11_, id_102_f_memcpy_01_c_l_56_c_4_).
 cfg(id_104_f_memcpy_01_c_l_54_c_4_, id_101_f_memcpy_01_c_l_56_c_11_).
@@ -962,8 +962,8 @@ cfg(id_172_f_memcpy_01_c_l_23_c_4_, id_167_f_memcpy_01_c_l_25_c_4_).
 cfg(id_169_f_memcpy_01_c_l_23_c_11_, id_172_f_memcpy_01_c_l_23_c_4_).
 cfg(id_170_f_memcpy_01_c_l_23_c_4_, id_169_f_memcpy_01_c_l_23_c_11_).
 cfg(id_176_f_l_21_c_0_, id_170_f_memcpy_01_c_l_23_c_4_).
-*/
-% REF
+
+%ref
 ref(id_171_f_l_c_, id_29_f_l_c_).
 ref(id_165_f_l_c_, id_90_f_l_c_).
 ref(id_162_f_l_c_, id_32_f_l_c_).
@@ -1018,7 +1018,7 @@ alloc(id_127_f_memmove_01_c_l_25_c_18_).
 assignment(id_132_f_memmove_01_c_l_25_c_4_).
 assignment(id_135_f_l_c_).
 assignment(id_136_f_memmove_01_c_l_23_c_4_).
-/*
+
 % AST
 ast(id_80_f_memmove_01_c_l_54_c_4_, id_79_f_memmove_01_c_l_54_c_11_).
 ast(id_95_f_memmove_01_c_l_47_c_0_, id_80_f_memmove_01_c_l_54_c_4_).
@@ -1148,7 +1148,7 @@ ast(id_138_f_memmove_01_c_l_22_c_0_, id_137_f_l_c_).
 ast(id_140_f_l_21_c_0_, id_138_f_memmove_01_c_l_22_c_0_).
 ast(id_140_f_l_21_c_0_, id_139_f_l_21_c_0_).
 ast(id_147_f_l_c_, id_140_f_l_21_c_0_).
-% CFG
+%cfg
 cfg(id_80_f_memmove_01_c_l_54_c_4_, id_96_f_l_46_c_0_).
 cfg(id_79_f_memmove_01_c_l_54_c_11_, id_80_f_memmove_01_c_l_54_c_4_).
 cfg(id_82_f_memmove_01_c_l_52_c_4_, id_79_f_memmove_01_c_l_54_c_11_).
@@ -1183,8 +1183,8 @@ cfg(id_136_f_memmove_01_c_l_23_c_4_, id_131_f_memmove_01_c_l_25_c_4_).
 cfg(id_133_f_memmove_01_c_l_23_c_11_, id_136_f_memmove_01_c_l_23_c_4_).
 cfg(id_134_f_memmove_01_c_l_23_c_4_, id_133_f_memmove_01_c_l_23_c_11_).
 cfg(id_140_f_l_21_c_0_, id_134_f_memmove_01_c_l_23_c_4_).
-*/
-% REF
+
+%ref
 ref(id_135_f_l_c_, id_48_f_l_c_).
 ref(id_129_f_l_c_, id_62_f_l_c_).
 ref(id_126_f_l_c_, id_34_f_l_c_).
@@ -1213,7 +1213,7 @@ ref(id_121_f_memmove_01_c_l_27_c_12_, id_123_f_l_c_).
 ref(id_131_f_memmove_01_c_l_25_c_4_, id_137_f_l_c_).
 ref(id_134_f_memmove_01_c_l_23_c_4_, id_137_f_l_c_).
 % END: Generated Prolog 
-
+% 
 % START: Generated Prolog
 % NODE PROPERTIES 
 assignment(id_23_f_l_c_).
@@ -1230,7 +1230,7 @@ alloc(id_127_f_memcpy_18_c_l_27_c_18_).
 assignment(id_132_f_memcpy_18_c_l_27_c_4_).
 assignment(id_137_f_l_c_).
 assignment(id_138_f_memcpy_18_c_l_23_c_4_).
-/*
+
 % AST
 ast(id_151_f_l_c_, id_59_f_l_c_).
 ast(id_151_f_l_c_, id_54_f_l_c_).
@@ -1362,7 +1362,7 @@ ast(id_140_f_memcpy_18_c_l_22_c_0_, id_139_f_l_c_).
 ast(id_142_f_l_21_c_0_, id_140_f_memcpy_18_c_l_22_c_0_).
 ast(id_142_f_l_21_c_0_, id_141_f_l_21_c_0_).
 ast(id_149_f_l_c_, id_142_f_l_21_c_0_).
-% CFG
+%cfg
 cfg(id_80_f_memcpy_18_c_l_56_c_4_, id_96_f_l_48_c_0_).
 cfg(id_79_f_memcpy_18_c_l_56_c_11_, id_80_f_memcpy_18_c_l_56_c_4_).
 cfg(id_82_f_memcpy_18_c_l_54_c_4_, id_79_f_memcpy_18_c_l_56_c_11_).
@@ -1398,8 +1398,8 @@ cfg(id_138_f_memcpy_18_c_l_23_c_4_, id_134_f_memcpy_18_c_l_24_c_4_).
 cfg(id_135_f_memcpy_18_c_l_23_c_11_, id_138_f_memcpy_18_c_l_23_c_4_).
 cfg(id_136_f_memcpy_18_c_l_23_c_4_, id_135_f_memcpy_18_c_l_23_c_11_).
 cfg(id_142_f_l_21_c_0_, id_136_f_memcpy_18_c_l_23_c_4_).
-*/
-% REF
+
+%ref
 ref(id_137_f_l_c_, id_23_f_l_c_).
 ref(id_129_f_l_c_, id_54_f_l_c_).
 ref(id_126_f_l_c_, id_42_f_l_c_).
@@ -1428,7 +1428,7 @@ ref(id_121_f_memcpy_18_c_l_29_c_12_, id_123_f_l_c_).
 ref(id_131_f_memcpy_18_c_l_27_c_4_, id_139_f_l_c_).
 ref(id_136_f_memcpy_18_c_l_23_c_4_, id_139_f_l_c_).
 % END: Generated Prolog 
-
+% 
 % START: Generated Prolog
 % NODE PROPERTIES 
 assignment(id_23_f_l_c_).
@@ -1446,7 +1446,7 @@ assignment(id_132_f_memcpy_01_c_l_25_c_4_).
 assignment(id_135_f_l_c_).
 assignment(id_136_f_memcpy_01_c_l_23_c_4_).
 
-/*
+
 % AST
 ast(id_149_f_l_c_, id_68_f_l_c_).
 ast(id_149_f_l_c_, id_67_f_l_c_).
@@ -1576,7 +1576,7 @@ ast(id_148_f_l_c_, id_143_f_l_29_c_).
 ast(id_148_f_l_c_, id_144_f_l_25_c_).
 ast(id_148_f_l_c_, id_145_f_l_6_c_).
 ast(id_148_f_l_c_, id_146_f_l_1_c_).
-% CFG
+%cfg
 cfg(id_80_f_memcpy_01_c_l_54_c_4_, id_96_f_l_46_c_0_).
 cfg(id_79_f_memcpy_01_c_l_54_c_11_, id_80_f_memcpy_01_c_l_54_c_4_).
 cfg(id_82_f_memcpy_01_c_l_52_c_4_, id_79_f_memcpy_01_c_l_54_c_11_).
@@ -1611,8 +1611,8 @@ cfg(id_136_f_memcpy_01_c_l_23_c_4_, id_131_f_memcpy_01_c_l_25_c_4_).
 cfg(id_133_f_memcpy_01_c_l_23_c_11_, id_136_f_memcpy_01_c_l_23_c_4_).
 cfg(id_134_f_memcpy_01_c_l_23_c_4_, id_133_f_memcpy_01_c_l_23_c_11_).
 cfg(id_140_f_l_21_c_0_, id_134_f_memcpy_01_c_l_23_c_4_).
-*/
-% REF
+
+%ref
 ref(id_135_f_l_c_, id_23_f_l_c_).
 ref(id_129_f_l_c_, id_67_f_l_c_).
 ref(id_126_f_l_c_, id_26_f_l_c_).
@@ -1641,7 +1641,7 @@ ref(id_121_f_memcpy_01_c_l_27_c_12_, id_123_f_l_c_).
 ref(id_131_f_memcpy_01_c_l_25_c_4_, id_137_f_l_c_).
 ref(id_134_f_memcpy_01_c_l_23_c_4_, id_137_f_l_c_).
 % END: Generated Prolog 
-
+% 
 % START: Generated Prolog
 % NODE PROPERTIES 
 assignment(id_16_f_l_c_).
@@ -1659,7 +1659,7 @@ alloc(id_131_f_loop_01_c_l_25_c_18_).
 assignment(id_135_f_loop_01_c_l_25_c_4_).
 assignment(id_138_f_l_c_).
 assignment(id_139_f_loop_01_c_l_23_c_4_).
-/*
+
 % AST
 ast(id_152_f_l_c_, id_58_f_l_c_).
 ast(id_152_f_l_c_, id_54_f_l_c_).
@@ -1792,7 +1792,7 @@ ast(id_95_f_l_50_c_0_, id_92_f_l_50_c_0_).
 ast(id_95_f_l_50_c_0_, id_93_f_l_50_c_19_).
 ast(id_95_f_l_50_c_0_, id_94_f_l_50_c_9_).
 ast(id_150_f_l_c_, id_95_f_l_50_c_0_).
-% CFG
+%cfg
 cfg(id_103_f_loop_01_c_l_34_c_8_, id_142_f_l_21_c_0_).
 cfg(id_101_f_loop_01_c_l_34_c_21_, id_103_f_loop_01_c_l_34_c_8_).
 cfg(id_99_f_loop_01_c_l_34_c_26_, id_101_f_loop_01_c_l_34_c_21_).
@@ -1836,8 +1836,8 @@ cfg(id_88_f_loop_01_c_l_52_c_11_, id_90_f_loop_01_c_l_52_c_4_).
 cfg(id_85_f_loop_01_c_l_52_c_21_, id_88_f_loop_01_c_l_52_c_11_).
 cfg(id_83_f_loop_01_c_l_52_c_26_, id_85_f_loop_01_c_l_52_c_21_).
 cfg(id_95_f_l_50_c_0_, id_83_f_loop_01_c_l_52_c_26_).
-*/
-% REF
+
+%ref
 ref(id_152_f_l_c_, id_68_f_l_c_).
 ref(id_150_f_l_c_, id_68_f_l_c_).
 ref(id_138_f_l_c_, id_16_f_l_c_).
@@ -1871,7 +1871,7 @@ ref(id_125_f_loop_01_c_l_27_c_12_, id_127_f_l_c_).
 ref(id_134_f_loop_01_c_l_25_c_4_, id_140_f_l_c_).
 ref(id_137_f_loop_01_c_l_23_c_4_, id_140_f_l_c_).
 % END: Generated Prolog 
-
+% 
 % START: Generated Prolog
 % NODE PROPERTIES 
 alloc(id_29_f_l_c_).
@@ -1892,7 +1892,7 @@ alloc(id_154_f_loop_01_c_l_27_c_18_).
 assignment(id_159_f_loop_01_c_l_27_c_4_).
 assignment(id_162_f_l_c_).
 assignment(id_163_f_loop_01_c_l_25_c_4_).
-/*
+
 % AST
 ast(id_177_f_l_c_, id_70_f_l_c_).
 ast(id_177_f_l_c_, id_64_f_l_c_).
@@ -2046,7 +2046,7 @@ ast(id_165_f_loop_01_c_l_24_c_0_, id_164_f_l_c_).
 ast(id_167_f_l_23_c_0_, id_165_f_loop_01_c_l_24_c_0_).
 ast(id_167_f_l_23_c_0_, id_166_f_l_23_c_0_).
 ast(id_175_f_l_c_, id_167_f_l_23_c_0_).
-% CFG
+%cfg
 cfg(id_85_f_loop_01_c_l_64_c_4_, id_101_f_l_56_c_0_).
 cfg(id_84_f_loop_01_c_l_64_c_11_, id_85_f_loop_01_c_l_64_c_4_).
 cfg(id_87_f_loop_01_c_l_62_c_4_, id_84_f_loop_01_c_l_64_c_11_).
@@ -2095,8 +2095,8 @@ cfg(id_163_f_loop_01_c_l_25_c_4_, id_158_f_loop_01_c_l_27_c_4_).
 cfg(id_160_f_loop_01_c_l_25_c_11_, id_163_f_loop_01_c_l_25_c_4_).
 cfg(id_161_f_loop_01_c_l_25_c_4_, id_160_f_loop_01_c_l_25_c_11_).
 cfg(id_167_f_l_23_c_0_, id_161_f_loop_01_c_l_25_c_4_).
-*/
-% REF
+
+%ref
 ref(id_177_f_l_c_, id_0_f_l_c_).
 ref(id_175_f_l_c_, id_0_f_l_c_).
 ref(id_162_f_l_c_, id_49_f_l_c_).
@@ -2152,7 +2152,7 @@ alloc(id_138_f_memcpy_01_c_l_27_c_18_).
 assignment(id_142_f_memcpy_01_c_l_27_c_4_).
 assignment(id_145_f_l_c_).
 assignment(id_146_f_memcpy_01_c_l_25_c_4_).
-/*
+
 % AST
 ast(id_159_f_l_c_, id_151_f_l_54_c_).
 ast(id_159_f_l_c_, id_152_f_l_44_c_).
@@ -2291,7 +2291,7 @@ ast(id_104_f_l_52_c_0_, id_101_f_l_52_c_0_).
 ast(id_104_f_l_52_c_0_, id_102_f_l_52_c_19_).
 ast(id_104_f_l_52_c_0_, id_103_f_l_52_c_9_).
 ast(id_158_f_l_c_, id_104_f_l_52_c_0_).
-% CFG
+%cfg
 cfg(id_106_f_memcpy_01_c_l_38_c_4_, id_108_f_l_37_c_0_).
 cfg(id_109_f_l_37_c_0_, id_106_f_memcpy_01_c_l_38_c_4_).
 cfg(id_118_f_memcpy_01_c_l_32_c_8_, id_149_f_l_23_c_0_).
@@ -2331,8 +2331,8 @@ cfg(id_97_f_memcpy_01_c_l_54_c_11_, id_99_f_memcpy_01_c_l_54_c_4_).
 cfg(id_94_f_memcpy_01_c_l_54_c_21_, id_97_f_memcpy_01_c_l_54_c_11_).
 cfg(id_92_f_memcpy_01_c_l_54_c_26_, id_94_f_memcpy_01_c_l_54_c_21_).
 cfg(id_104_f_l_52_c_0_, id_92_f_memcpy_01_c_l_54_c_26_).
-*/
-% REF
+
+%ref
 ref(id_145_f_l_c_, id_65_f_l_c_).
 ref(id_137_f_l_c_, id_28_f_l_c_).
 ref(id_135_f_l_c_, id_32_f_l_c_).
@@ -2363,7 +2363,7 @@ ref(id_144_f_memcpy_01_c_l_25_c_4_, id_147_f_l_c_).
 ref(id_160_f_l_c_, id_77_f_l_c_).
 ref(id_158_f_l_c_, id_77_f_l_c_).
 % END: Generated Prolog 
-
+% 
 % START: Generated Prolog
 % NODE PROPERTIES 
 sizeOf(id_31_f_l_c_).
@@ -2381,7 +2381,7 @@ alloc(id_138_f_memcpy_18_c_l_29_c_18_).
 assignment(id_142_f_memcpy_18_c_l_29_c_4_).
 assignment(id_147_f_l_c_).
 assignment(id_148_f_memcpy_18_c_l_25_c_4_).
-/*
+
 % AST
 ast(id_107_f_memcpy_18_c_l_40_c_0_, id_106_f_memcpy_18_c_l_40_c_4_).
 ast(id_109_f_l_39_c_0_, id_107_f_memcpy_18_c_l_40_c_0_).
@@ -2522,7 +2522,7 @@ ast(id_104_f_l_54_c_0_, id_101_f_l_54_c_0_).
 ast(id_104_f_l_54_c_0_, id_102_f_l_54_c_19_).
 ast(id_104_f_l_54_c_0_, id_103_f_l_54_c_9_).
 ast(id_160_f_l_c_, id_104_f_l_54_c_0_).
-% CFG
+%cfg
 cfg(id_106_f_memcpy_18_c_l_40_c_4_, id_108_f_l_39_c_0_).
 cfg(id_109_f_l_39_c_0_, id_106_f_memcpy_18_c_l_40_c_4_).
 cfg(id_144_f_memcpy_18_c_l_26_c_4_, id_141_f_memcpy_18_c_l_29_c_4_).
@@ -2563,8 +2563,8 @@ cfg(id_97_f_memcpy_18_c_l_56_c_11_, id_99_f_memcpy_18_c_l_56_c_4_).
 cfg(id_94_f_memcpy_18_c_l_56_c_21_, id_97_f_memcpy_18_c_l_56_c_11_).
 cfg(id_92_f_memcpy_18_c_l_56_c_26_, id_94_f_memcpy_18_c_l_56_c_21_).
 cfg(id_104_f_l_54_c_0_, id_92_f_memcpy_18_c_l_56_c_26_).
-*/
-% REF
+
+%ref
 ref(id_147_f_l_c_, id_67_f_l_c_).
 ref(id_137_f_l_c_, id_65_f_l_c_).
 ref(id_135_f_l_c_, id_33_f_l_c_).
@@ -2595,7 +2595,7 @@ ref(id_146_f_memcpy_18_c_l_25_c_4_, id_149_f_l_c_).
 ref(id_162_f_l_c_, id_77_f_l_c_).
 ref(id_160_f_l_c_, id_77_f_l_c_).
 % END: Generated Prolog 
-
+% 
 % START: Generated Prolog
 % NODE PROPERTIES 
 alloc(id_20_f_l_c_).
@@ -2616,7 +2616,7 @@ alloc(id_138_f_memmove_01_c_l_27_c_18_).
 assignment(id_142_f_memmove_01_c_l_27_c_4_).
 assignment(id_145_f_l_c_).
 assignment(id_146_f_memmove_01_c_l_25_c_4_).
-/*
+
 % AST
 ast(id_160_f_l_c_, id_68_f_l_c_).
 ast(id_160_f_l_c_, id_67_f_l_c_).
@@ -2755,7 +2755,7 @@ ast(id_107_f_memmove_01_c_l_38_c_0_, id_106_f_memmove_01_c_l_38_c_4_).
 ast(id_109_f_l_37_c_0_, id_107_f_memmove_01_c_l_38_c_0_).
 ast(id_109_f_l_37_c_0_, id_108_f_l_37_c_0_).
 ast(id_158_f_l_c_, id_109_f_l_37_c_0_).
-% CFG
+%cfg
 cfg(id_118_f_memmove_01_c_l_32_c_8_, id_149_f_l_23_c_0_).
 cfg(id_116_f_memmove_01_c_l_32_c_21_, id_118_f_memmove_01_c_l_32_c_8_).
 cfg(id_113_f_memmove_01_c_l_32_c_26_, id_116_f_memmove_01_c_l_32_c_21_).
@@ -2795,8 +2795,8 @@ cfg(id_90_f_memmove_01_c_l_54_c_26_, id_92_f_memmove_01_c_l_54_c_21_).
 cfg(id_102_f_l_52_c_0_, id_90_f_memmove_01_c_l_54_c_26_).
 cfg(id_106_f_memmove_01_c_l_38_c_4_, id_108_f_l_37_c_0_).
 cfg(id_109_f_l_37_c_0_, id_106_f_memmove_01_c_l_38_c_4_).
-*/
-% REF
+
+%ref
 ref(id_145_f_l_c_, id_23_f_l_c_).
 ref(id_137_f_l_c_, id_20_f_l_c_).
 ref(id_135_f_l_c_, id_42_f_l_c_).
@@ -2827,7 +2827,7 @@ ref(id_144_f_memmove_01_c_l_25_c_4_, id_147_f_l_c_).
 ref(id_160_f_l_c_, id_77_f_l_c_).
 ref(id_158_f_l_c_, id_77_f_l_c_).
 % END: Generated Prolog 
-
+% 
 % START: Generated Prolog
 % NODE PROPERTIES 
 compMemberAccess(id_82_f_l_c_).
@@ -2845,7 +2845,7 @@ alloc(id_174_f_memcpy_01_c_l_27_c_18_).
 assignment(id_178_f_memcpy_01_c_l_27_c_4_).
 assignment(id_181_f_l_c_).
 assignment(id_182_f_memcpy_01_c_l_25_c_4_).
-/*
+
 % AST
 ast(id_129_f_memcpy_01_c_l_40_c_0_, id_128_f_memcpy_01_c_l_40_c_4_).
 ast(id_131_f_l_39_c_0_, id_129_f_memcpy_01_c_l_40_c_0_).
@@ -3016,7 +3016,7 @@ ast(id_126_f_l_54_c_0_, id_123_f_l_54_c_0_).
 ast(id_126_f_l_54_c_0_, id_124_f_l_54_c_19_).
 ast(id_126_f_l_54_c_0_, id_125_f_l_54_c_9_).
 ast(id_194_f_l_c_, id_126_f_l_54_c_0_).
-% CFG
+%cfg
 cfg(id_128_f_memcpy_01_c_l_40_c_4_, id_130_f_l_39_c_0_).
 cfg(id_131_f_l_39_c_0_, id_128_f_memcpy_01_c_l_40_c_4_).
 cfg(id_137_f_memcpy_01_c_l_34_c_8_, id_185_f_l_23_c_0_).
@@ -3065,8 +3065,8 @@ cfg(id_119_f_memcpy_01_c_l_56_c_11_, id_121_f_memcpy_01_c_l_56_c_4_).
 cfg(id_116_f_memcpy_01_c_l_56_c_21_, id_119_f_memcpy_01_c_l_56_c_11_).
 cfg(id_114_f_memcpy_01_c_l_56_c_26_, id_116_f_memcpy_01_c_l_56_c_21_).
 cfg(id_126_f_l_54_c_0_, id_114_f_memcpy_01_c_l_56_c_26_).
-*/
-% REF
+
+%ref
 ref(id_196_f_l_c_, id_0_f_l_c_).
 ref(id_194_f_l_c_, id_0_f_l_c_).
 ref(id_181_f_l_c_, id_87_f_l_c_).
@@ -3109,18 +3109,17 @@ ref(id_180_f_memcpy_01_c_l_25_c_4_, id_183_f_l_c_).
 %% positive examples
 
 bug(id_120_f_memmove_01_c_l_29_c_8_).
-bug(id_146_f_memcpy_01_c_l_30_c_8_).
-bug(id_121_f_memcpy_18_c_l_31_c_8_).
+bug(id_145_f_memcpy_01_c_l_30_c_8_).
+bug(id_120_f_memcpy_18_c_l_31_c_8_).
 bug(id_120_f_memcpy_01_c_l_29_c_8_).
-bug(id_110_f_loop_01_c_l_32_c_12_).
+bug(id_111_f_loop_01_c_l_32_c_12_).
     
 
 %% negative examples
 
+:- bug(id_126_f_memmove_01_c_l_31_c_8_).
+:- bug(id_126_f_memcpy_01_c_l_31_c_8_).
+:- bug(id_126_f_memcpy_18_c_l_33_c_8_).
 :- bug(id_129_f_loop_01_c_l_34_c_12_).
-:- bug(id_125_f_memcpy_01_c_l_31_c_8_).
-:- bug(id_125_f_memcpy_18_c_l_33_c_8_).
-:- bug(id_125_f_memmove_01_c_l_31_c_8_).
-:- bug(id_150_f_memcpy_01_c_l_32_c_8_).
+:- bug(id_151_f_memcpy_01_c_l_32_c_8_).
     
-
