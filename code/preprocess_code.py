@@ -18,6 +18,10 @@ import pandas as pd
 
 from tqdm import tqdm
 
+import ast
+from scipy import sparse
+import networkx as nx
+
 # This cell might not be needed for you.
 clang.cindex.Config.set_library_file(
     '/lib/x86_64-linux-gnu/libclang-8.so.1'
@@ -257,7 +261,44 @@ def gen_adj_matrix(x):
     return B
 
 
-def preprocess_all_for_adjmatrix(csv_location, output_location, num_partitions=20):
+def preprocess_all_for_node2vec(csv_location, num_partitions=20)
+    """
+    Given a data set (e.g. buffer_overflow_data.csv.gz) loaded in 
+    as a pandas dataframe, it outputs all the edgelists files for
+    ast tree.
+    
+    TODO: combine all_for_node2vec and all_for_adjmatrix into one
+    """
+    print("Preprocess our code so it can be used as an input into node2vec (egdelist).")
+    data = pd.read_csv(csv_location)
+    data = dd.from_pandas(data, npartitions=num_partitions)
+    
+    graphs = data.groupby(['testcase_ID']).apply(
+        process_for_node2vec,
+        axis='columns',
+        meta=('processed_for_node2vec', 'unicode'),
+    )
+    
+    print("`-> Finished prepping data for node2vec.")
+    
+    print("Making a directory to put our node2vec inputs into.")
+
+    node2vec_input_dir = "../data/node2vec_input/"
+    os.makedirs(node2vec_input_dir, exist_ok=True)
+
+    print("Save to edgelists into txt files:")
+    for index, row in graphs.iteritems():
+        print("Current Iteration: "+str(index))
+        with open(node2vec_input_dir + str(index) + ".txt", 'w') as f:  
+            f.writelines("%s %s\n" % (parent,child) for parent, child in row)
+            
+    print("`-> Done.")
+
+    return node2vec_input_dir
+
+
+
+def preprocess_all_for_adjmatrix(csv_location, output_location="../data/adj.pickle", num_partitions=20):
     """
     Given a data set (e.g. buffer_overflow_data.csv.gz) loaded in 
     as a pandas dataframe, it gets the adj_matrix and then output
@@ -292,8 +333,12 @@ def preprocess_all_for_adjmatrix(csv_location, output_location, num_partitions=2
     # In case something wrong here
     print("Save the pickle")
     import pdb; pdb.set_trace()
-    with open("../data/adj.pickle",'wb') as f:
+    with open(output_location,'wb') as f:
         pickle.dump(adj,f)
+    
+    print("`-> Done.")
+
+    return output_location
     
 
 def preprocess_all_for_graph2vec(csv_location, output_location, num_partitions=20):
