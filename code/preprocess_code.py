@@ -173,6 +173,45 @@ def process_for_graph2vec(testcase, **kwargs):
     return json.dumps(graph2vec_representation)
 
 
+def process_for_node2vec(testcase, **kwargs):
+    """
+    By changing the function process_for_graph2vec, 
+    just to get the edgelist, which can be used in 
+    get node2vec and adjective matrix
+    """
+    parse_list = [
+        (datapoint.filename, datapoint.code)
+        for datapoint in testcase.itertuples()
+    ]
+
+    primary = find_primary_source_file(testcase)
+
+    # Parse the source code with clang, and get out an ast:
+    index = clang.cindex.Index.create()
+    translation_unit = index.parse(
+        path=primary.filename,
+        unsaved_files=parse_list,
+    )
+    ast_root = translation_unit.cursor
+
+    # Memoise/concretise the ast so that we can consistently
+    # modify it, then number each node in the tree uniquely.
+    concretise_ast(ast_root)
+    number_ast_nodes(ast_root)
+
+    # Next, construct an edge list for the graph2vec input:
+    edgelist = generate_edgelist(ast_root)
+
+    # Construct a list of features for each node
+
+    # Explicitly delete clang objects
+    del translation_unit
+    del ast_root
+    del index
+
+    return edgelist
+
+
 def find_primary_source_file(datapoints):
     """
     Given a list of datapoints representing the files for a single
@@ -199,6 +238,63 @@ def find_primary_source_file(datapoints):
 
         return primary
 
+    
+def gen_adj_matrix(x):
+    
+    """
+    Takes in a list of files/datapoints from buffer_overflow_data.csv.gz 
+    matching one particular testcase, and generates an adjacency matrix 
+    from the edgelist created.
+    """
+    G = nx.Graph()
+
+    G.add_edges_from(x)
+
+    A = nx.adjacency_matrix(G)
+
+    B = A.todense()
+
+    return B
+
+
+def preprocess_all_for_adjmatrix(csv_location, output_location, num_partitions=20):
+    """
+    Given a data set (e.g. buffer_overflow_data.csv.gz) loaded in 
+    as a pandas dataframe, it gets the adj_matrix and then output
+    into the pickle "adj.pickle".
+    """
+    print("Preprocess our code so it can be used as an input into node2vec (egdelist).")
+    data = pd.read_csv(csv_location)
+    data = dd.from_pandas(data, npartitions=num_partitions)
+    
+    graphs = data.groupby(['testcase_ID']).apply(
+        process_for_node2vec,
+        axis='columns',
+        meta=('processed_for_node2vec', 'unicode'),
+    )
+    
+    print("`-> Finished prepping data for node2vec.")
+    
+    print("Get a list for each datapoint:")
+    
+    from scipy import sparse
+    
+    df = []
+    for index, row in graphs.iteritems():
+        print("Current Iteration: "+str(index))
+        df.append([index,sparse.csr_matrix(gen_adj_matrix(row))])
+    
+    print("Transfer list into dataframe format")
+    
+    adj = pd.DataFrame(df)
+    
+    import pickle
+    # In case something wrong here
+    print("Save the pickle")
+    import pdb; pdb.set_trace()
+    with open("../data/adj.pickle",'wb') as f:
+        pickle.dump(adj,f)
+    
 
 def preprocess_all_for_graph2vec(csv_location, output_location, num_partitions=20):
     """
@@ -241,43 +337,6 @@ def preprocess_all_for_graph2vec(csv_location, output_location, num_partitions=2
 
     return graph2vec_input_dir
 
-def process_for_node2vec(testcase, **kwargs):
-    """
-    By changing the function process_for_graph2vec, 
-    just to get the edgelist, which can be used in 
-    get node2vec and adjective matrix
-    """
-    parse_list = [
-        (datapoint.filename, datapoint.code)
-        for datapoint in testcase.itertuples()
-    ]
-
-    primary = find_primary_source_file(testcase)
-
-    # Parse the source code with clang, and get out an ast:
-    index = clang.cindex.Index.create()
-    translation_unit = index.parse(
-        path=primary.filename,
-        unsaved_files=parse_list,
-    )
-    ast_root = translation_unit.cursor
-
-    # Memoise/concretise the ast so that we can consistently
-    # modify it, then number each node in the tree uniquely.
-    concretise_ast(ast_root)
-    number_ast_nodes(ast_root)
-
-    # Next, construct an edge list for the graph2vec input:
-    edgelist = generate_edgelist(ast_root)
-
-    # Construct a list of features for each node
-
-    # Explicitly delete clang objects
-    del translation_unit
-    del ast_root
-    del index
-
-    return edgelist
 
 def run_graph2vec(input_dir, output_location, num_graph2vec_workers=1):
     print("Runs graph2vec on each of the above datapoints")
