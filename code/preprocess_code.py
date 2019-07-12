@@ -261,7 +261,7 @@ def gen_adj_matrix(x):
     return B
 
 
-def preprocess_all_for_node2vec(csv_location, num_partitions=20)
+def preprocess_all_for_node2vec(csv_location, num_partitions=20):
     """
     Given a data set (e.g. buffer_overflow_data.csv.gz) loaded in 
     as a pandas dataframe, it outputs all the edgelists files for
