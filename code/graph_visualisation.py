@@ -10,6 +10,7 @@ import tempfile
 import numpy as np
 import pandas as pd
 
+from collections import defaultdict
 from IPython.display import Image
 
 
@@ -18,7 +19,80 @@ def prolog_rule_to_dot(prolog_rule):
     TODO: given a prolog rule (as a string), parse it and return the
     graphviz source of the code property graph it represents.
     """
-    pass
+    prolog_rule = prolog_rule.strip().strip(".")
+    head, body = prolog_rule.split(" :- ")
+
+    goals = body.split(', ')
+
+    ast_edges = []
+    cfg_edges = []
+    ref_edges = []
+    ancestor_edges = []
+    node_properties = defaultdict(list)  # {node_name: [node_properties]}
+
+    for goal in goals:
+        functor, arguments = goal[:-1].split("(")
+
+        if functor == 'ast':
+            start, end = arguments.split(',')
+            ast_edges.append((start, end))
+
+        elif functor == 'ancestor':
+            start, end = arguments.split(',')
+            ancestor_edges.append((start, end))
+
+        elif functor == 'cfg':
+            start, end = arguments.split(',')
+            cfg_edges.append((start, end))
+
+        elif functor == 'ref':
+            start, end = arguments.split(',')
+            ref_edges.append((start,end))
+
+        else:
+            [node_name] = arguments.split(',')
+            node_property = functor
+            node_properties[node_name].append(node_property)
+
+    def make_dot_edge(edge):
+        start, end = edge
+        return start + " -> " + end
+
+    cfg_dot_edgelist = '\n'.join(map(make_dot_edge, cfg_edges))
+    ast_dot_edgelist = '\n'.join(map(make_dot_edge, ast_edges))
+    ancestor_dot_edgelist = '\n'.join(map(make_dot_edge, ancestor_edges))
+    ref_dot_edgelist = '\n'.join(map(make_dot_edge, ref_edges))
+
+    node_labels = ''
+    for name, properties in node_properties.items():
+        node_labels += name + ' [label="' + ", ".join(properties) + ' : ' + name +'"] \n'
+
+    return """
+        digraph g {
+            {  # NODE LABELS
+                node[shape=box]
+                """ + node_labels + """
+            }
+            {  # AST
+                edge[color=green3, constraint=true]
+                """ + ast_dot_edgelist + """
+            }
+            {  # Ancestor
+                edge[color=purple3, constraint=true]
+                """ + ancestor_dot_edgelist + """
+            }
+            {  # CFG
+                edge[color=red3, constraint=false]
+                """ + cfg_dot_edgelist + """
+            }
+            {  # REF
+                edge[color=blue3, constraint=false]
+                """ + ref_dot_edgelist + """
+            }
+        }
+    """
+
+
 
 
 def c_source_to_dot(joern_rule):
