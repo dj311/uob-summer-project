@@ -84,7 +84,7 @@ def prolog_rule_to_dot(prolog_rule):
                 """ + ast_dot_edgelist + """
             }
             {  # ANCESTOR
-                edge[color=purple3, constraint=true]
+                edge[color=green3, constraint=true, style=dashed]
                 """ + ancestor_dot_edgelist + """
             }
             {  # CFG
@@ -92,7 +92,7 @@ def prolog_rule_to_dot(prolog_rule):
                 """ + cfg_dot_edgelist + """
             }
             {  # RUNS BEFORE
-                edge[color=orange3, constraint=false]
+                edge[color=red3, constraint=false, style=dashed]
                 """ + runs_before_dot_edgelist + """
             }
             {  # REF
