@@ -28,6 +28,7 @@ def prolog_rule_to_dot(prolog_rule):
     cfg_edges = []
     ref_edges = []
     ancestor_edges = []
+    runs_before_edges = []
     node_properties = defaultdict(list)  # {node_name: [node_properties]}
 
     for goal in goals:
@@ -45,6 +46,10 @@ def prolog_rule_to_dot(prolog_rule):
             start, end = arguments.split(',')
             cfg_edges.append((start, end))
 
+        elif functor == 'runs_before':
+            start, end = arguments.split(',')
+            runs_before_edges.append((start, end))
+
         elif functor == 'ref':
             start, end = arguments.split(',')
             ref_edges.append((start,end))
@@ -61,6 +66,7 @@ def prolog_rule_to_dot(prolog_rule):
     cfg_dot_edgelist = '\n'.join(map(make_dot_edge, cfg_edges))
     ast_dot_edgelist = '\n'.join(map(make_dot_edge, ast_edges))
     ancestor_dot_edgelist = '\n'.join(map(make_dot_edge, ancestor_edges))
+    runs_before_dot_edgelist = '\n'.join(map(make_dot_edge, runs_before_edges))
     ref_dot_edgelist = '\n'.join(map(make_dot_edge, ref_edges))
 
     node_labels = ''
@@ -77,13 +83,17 @@ def prolog_rule_to_dot(prolog_rule):
                 edge[color=green3, constraint=true]
                 """ + ast_dot_edgelist + """
             }
-            {  # Ancestor
+            {  # ANCESTOR
                 edge[color=purple3, constraint=true]
                 """ + ancestor_dot_edgelist + """
             }
             {  # CFG
                 edge[color=red3, constraint=false]
                 """ + cfg_dot_edgelist + """
+            }
+            {  # RUNS BEFORE
+                edge[color=orange3, constraint=false]
+                """ + runs_before_dot_edgelist + """
             }
             {  # REF
                 edge[color=blue3, constraint=false]
