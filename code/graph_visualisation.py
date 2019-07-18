@@ -19,7 +19,14 @@ def prolog_rule_to_dot(prolog_rule):
     TODO: given a prolog rule (as a string), parse it and return the
     graphviz source of the code property graph it represents.
     """
+
+    # Make rule a single line without messing up the splits we use later.
+    prolog_rule = prolog_rule.replace("), \n\t", "), ")
+    prolog_rule = prolog_rule.replace("),\n\t", "), ")
+    prolog_rule = prolog_rule.replace(",\n\t", ",")
+    # Remove whitespace and . at end
     prolog_rule = prolog_rule.strip().strip(".")
+
     head, body = prolog_rule.split(" :- ")
 
     goals = body.split(', ')
@@ -32,31 +39,31 @@ def prolog_rule_to_dot(prolog_rule):
     node_properties = defaultdict(list)  # {node_name: [node_properties]}
 
     for goal in goals:
-        functor, arguments = goal[:-1].split("(")
+        *functors, arguments = goal.strip(")").split("(")
 
-        if functor == 'ast':
+        if functors == ['ast']:
             start, end = arguments.split(',')
             ast_edges.append((start, end))
 
-        elif functor == 'ancestor':
+        elif functors == ['ancestor']:
             start, end = arguments.split(',')
             ancestor_edges.append((start, end))
 
-        elif functor == 'cfg':
+        elif functors == ['cfg']:
             start, end = arguments.split(',')
             cfg_edges.append((start, end))
 
-        elif functor == 'runs_before':
+        elif functors == ['runs_before']:
             start, end = arguments.split(',')
             runs_before_edges.append((start, end))
 
-        elif functor == 'ref':
+        elif functors == ['ref']:
             start, end = arguments.split(',')
             ref_edges.append((start,end))
 
         else:
             [node_name] = arguments.split(',')
-            node_property = functor
+            node_property = '◦'.join(functors)
             node_properties[node_name].append(node_property)
 
     def make_dot_edge(edge):
@@ -133,7 +140,7 @@ def jupyter_display_graph(dot_source, filetype='png'):
     """
     tmp_filename = "/tmp/jupyter_tmp_image"
 
-    tmp_file = open(tmp_filename, "w")
+    tmp_file = open(tmp_filename, "w", encoding="utf-8")
     tmp_file.write(dot_source)
     tmp_file.close()
 
