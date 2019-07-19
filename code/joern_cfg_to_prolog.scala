@@ -98,7 +98,7 @@ def toProlog(graph: ScalaGraph): String = {
         case "int *" =>
           buf.append("pointer(" + vertex_str + ").\n")
         case "void" =>
-          buf.append("void(" + vertex_str + ").\n")
+          buf.append("voidPointer(" + vertex_str + ").\n")
         case "int [ 10 ]" =>
           buf.append("sizeOfInt(" + vertex_str + ").\n")
           buf.append("array10(" + vertex_str + ").\n")
