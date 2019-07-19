@@ -17,30 +17,7 @@ def vertexToStr(vertex: Vertex, identifiers: Map[Vertex,Int]): String = {
   val str = new StringBuffer()
 
   str.append("id_")
-  str.append(identifiers(vertex).toString + "_")
-
-  str.append("f_")
-  Try {
-    val methodVertex = vertex.vertices(Direction.IN, "CONTAINS").nextChecked
-    val fileName = methodVertex.vertices(Direction.IN, "CONTAINS").nextChecked match {
-      case file: nodes.File => file.asInstanceOf[nodes.File].name
-      case _ => "NA"
-    }
-    val filename_temp = Paths.get(fileName).getFileName.toString
-    val newfile_name = filename_temp.replaceAll("CWE.*__CWE[0-9]+_", "").replaceAll("\\.", "_")
-
-    str.append(newfile_name + "_")
-  }
-
-  str.append("l_")
-  Try {
-    str.append(vertex.value2(NodeKeys.LINE_NUMBER).toString + "_")
-  }
-
-  str.append("c_")
-  Try {
-    str.append(vertex.value2(NodeKeys.COLUMN_NUMBER).toString + "_")
-  }
+  str.append(identifiers(vertex).toString)
 
   str.toString
 }

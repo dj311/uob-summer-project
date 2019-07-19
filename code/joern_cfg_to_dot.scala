@@ -1,3 +1,4 @@
+import scala.util.Try
 import gremlin.scala._
 import io.shiftleft.codepropertygraph.generated._
 import java.nio.file.Paths
@@ -13,16 +14,12 @@ import scala.io.Source
 
 /** Some helper functions: adapted from ReachingDefPass.scala in codeproperty graph repo */
 def vertexToStr(vertex: Vertex, identifiers: Map[Vertex,Int]): String = {
-  try {
-    val methodVertex = vertex.vertices(Direction.IN, "CONTAINS").nextChecked
-    val fileName = methodVertex.vertices(Direction.IN, "CONTAINS").nextChecked match {
-      case file: nodes.File => file.asInstanceOf[nodes.File].name
-      case _ => "NA"
-    }
-    val filename_temp = Paths.get(fileName).getFileName.toString
-    val newfile_name = filename_temp.replaceAll("CWE.*__CWE[0-9]+_", "").replaceAll("\\.", "_")
-    s"${identifiers(vertex).toString}_${newfile_name}_${vertex.value2(NodeKeys.LINE_NUMBER).toString}_${vertex.value2(NodeKeys.COLUMN_NUMBER).toString}"
-  } catch { case _: Exception => identifiers(vertex).toString }
+  val str = new StringBuffer()
+
+  str.append("id_")
+  str.append(identifiers(vertex).toString)
+
+  str.toString
 }
 
 def toDot(graph: ScalaGraph): String = {
