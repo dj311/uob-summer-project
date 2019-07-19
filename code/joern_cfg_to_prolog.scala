@@ -83,6 +83,32 @@ def toProlog(graph: ScalaGraph): String = {
       }
     }
   }
+  
+  buf.append("% METHOD \n")
+  graph.V.l.foreach{ v =>
+    val vertex_str = vertexToStr(v, vertex_identifiers)
+
+    Try {
+      val node_type = v.value2(NodeKeys.TYPE_FULL_NAME).toString
+      node_type match{
+        case "ANY" =>
+          buf.append("any(" + vertex_str + ").\n")
+        case "char * [ ]" =>
+          buf.append("string(" + vertex_str + ").\n")
+        case "size_t" =>
+          buf.append("size_int(" + vertex_str + ").\n")
+        case "int *" =>
+          buf.append("pointer(" + vertex_str + ").\n")
+        case "static" =>
+          buf.append("sizeOf(" + vertex_str + ").\n")
+        case "void" =>
+          buf.append("void(" + vertex_str + ").\n")
+        case "int [ 10 ]" =>
+          buf.append("int_10(" + vertex_str + ").\n")
+      }
+
+    }
+  }
 
   buf.append("% CODE\n")
   graph.V.l.foreach{ v =>
