@@ -7,7 +7,6 @@ import clang.cindex
 import gc
 import json
 import os
-import snap
 import subprocess
 import swifter
 import tempfile
@@ -20,7 +19,7 @@ from tqdm import tqdm
 
 # This cell might not be needed for you.
 clang.cindex.Config.set_library_file(
-    '/lib/x86_64-linux-gnu/libclang-8.so.1'
+    '/usr/lib/x86_64-linux-gnu/libclang-7.so.1'
 )
 
 
