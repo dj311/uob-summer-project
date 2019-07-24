@@ -1,2 +1,4 @@
 :- multifile(library_directory/1).
 library_directory('/metagol').
+library_directory('/aleph').
+library_directory('/project/code').
