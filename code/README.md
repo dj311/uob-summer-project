@@ -20,6 +20,7 @@ Node2vec requires edgelist for each ast. So by simplily removing the features we
 
 ### Adj matrix
 The adjencency matrix is saved into the file `../data/adj.pickle`.
+Our adjencency matrices for some reason is undirected, to fix this issue, I think we just need to get rid of the up-triangle values
 
 ### Edglist
 The outputs of all the edgelists are saved into other git repo named [`uob-summer-project-node2vec`](https://github.com/xihajun/uob-summer-project-node2vec).
