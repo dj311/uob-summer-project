@@ -19,7 +19,7 @@ from tqdm import tqdm
 
 # This cell might not be needed for you.
 clang.cindex.Config.set_library_file(
-    '/lib/x86_64-linux-gnu/libclang-8.so.1'
+    '/usr/lib/llvm-7/lib/libclang-7.so.1'
 )
 
 
@@ -280,6 +280,33 @@ def process_for_node2vec_label(testcase, **kwargs):
     del index
 
     return bad_label
+
+
+def generate_ast_roots(testcase, **kwargs):
+    """
+    Takes in a list of files/datapoints from juliet.csv.zip (as loaded with pandas) matching one particular
+    testcase, and preprocesses it ready for the feature matrix.
+    """
+        
+    parse_list = [
+        (datapoint.filename, datapoint.code)
+        for datapoint in testcase.itertuples()
+    ]
+
+    primary = find_primary_source_file(testcase)
+
+    # Parse the source code with clang, and get out an ast:
+    index = clang.cindex.Index.create()
+    translation_unit = index.parse(
+        path=primary.filename,
+        unsaved_files=parse_list,
+    )
+    ast_root = translation_unit.cursor
+    
+    concretise_ast(ast_root)
+    number_ast_nodes(ast_root)
+    
+    return ast_root
 
 
 def find_primary_source_file(datapoints):
