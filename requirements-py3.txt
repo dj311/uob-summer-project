@@ -15,3 +15,4 @@ joblib==0.13.0
 swifter==0.289
 sklearn==0.0
 cpgclientlib==0.9.264
+nbdime==1.0.6
