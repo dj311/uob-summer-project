@@ -1,5 +1,7 @@
 # Summer Project
 
+All of our documented code can be found in the code folder. The data used in this project can be found in the data folder.
+
 Work in progress.
 
 **WARNING**: There's ~65,000 JSON files within the `./data/juliet_graph2vec/` folder. We need to clean this up, but in the meantime, clone with care!
