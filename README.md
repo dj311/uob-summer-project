@@ -1,7 +1,7 @@
 # Machine Learning for Automated Vulnerability Detection in Source Code <small>(WIP)</small>
 *Masters Project at University of Bristol*
 
-All of our documented code can be found in the code folder. The data used in this project can be found in the data folder.
+All of our documented code can be found in the [code](./code/) folder. The data used in this project can be found in the [data](./data/) folder. Generated figures and images can be found in the [images](./images/) folder.
 
 
 ## Development
