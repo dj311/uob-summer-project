@@ -6,7 +6,7 @@ ILP: Inductive Logic Programming - code used to generate ILP rules and backgroun
 
 ML: Machine Learning - code used to create any of our other machine learning models (stacking model and neural networks)
 
-#Data Generation
+# Data Generation
 ## Guide of preprocess_code
 Most of our codes for preprecessing are in this file `preprocess_code.py`
 ### Requirements
