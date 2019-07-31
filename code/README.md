@@ -1,3 +1,11 @@
+All of our files have a tag, relating to a section of our project:
+
+DG: Data Generation - code used to generate and process the data used in our models
+
+ILP: Inductive Logic Programming - code used to generate ILP rules and background knowledge and code used to run ILP systems and generate a rule from this
+
+ML: Machine Learning - code used to create any of our other machine learning models (stacking model and neural networks)
+
 # Guide of preprocess_code
 Most of our codes for preprecessing are in this file `preprocess_code.py`
 ## Requirement
