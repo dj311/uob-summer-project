@@ -1,10 +1,8 @@
-# Summer Project
+# Machine Learning for Automated Vulnerability Detection in Source Code <small>(WIP)</small>
+*Masters Project at University of Bristol*
 
-All of our documented code can be found in the code folder. The data used in this project can be found in the data folder.
+All of our documented code can be found in the [code](./code/) folder. The data used in this project can be found in the [data](./data/) folder. Generated figures and images can be found in the [images](./images/) folder.
 
-Work in progress.
-
-**WARNING**: There's ~65,000 JSON files within the `./data/juliet_graph2vec/` folder. We need to clean this up, but in the meantime, clone with care!
 
 ## Development
 
