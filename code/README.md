@@ -1,17 +1,21 @@
 All of our files have a tag, relating to a section of our project:
 
-DG: Data Generation - code used to generate and process the data used in our models
-
-ILP: Inductive Logic Programming - code used to generate ILP rules and background knowledge and code used to run ILP systems and generate a rule from this
-
-ML: Machine Learning - code used to create any of our other machine learning models (stacking model and neural networks)
+  - DG: Data Generation - code used to generate and process the data used in our models
+  - ILP: Inductive Logic Programming - code used to generate ILP rules and background knowledge and code used to run ILP systems and generate a rule from this
+  - ML: Machine Learning - code used to create any of our other machine learning models (stacking model and neural networks)
 
 # Data Generation
+
+We started with two datasets containing labelled examples of vulnerabilities in C/C++:
+  1. [Juliet Software Assurance Dataset](https://samate.nist.gov/SARD/testsuite.php) :: The initial processing of this dataset was done in the ["Exploring Juliet"](./DG-exploring-juliet.ipynb) notebook.
+  2. [Draper VDISC Dataset](https://osf.io/d45bw/) :: The initial processing of this dataset was done in the ["Exploring VDISC"](./DG-exploring-vdisc.ipynb) notebook.
+  
+The result of these two notebooks is a Pandas dataframe for each dataset, each normalised to a simliar structure. These resultant files are [../data/juliet_split.csv.gz](../data/juliet_split.csv.gz), ['data/vdisc_train.csv.gz'](data/vdisc_train.csv.gz), ['data/vdisc_test.csv.gz'](data/vdisc_test.csv.gz), and ['data/vdisc_validate.csv.gz'](data/vdisc_validate.csv.gz).
+
 ## Guide of preprocess_code
 Most of our codes for preprecessing are in this file `preprocess_code.py`
-### Requirements
-In order to impliment it, it is necessary to install a bit requirements in advance which can be found in [`../requirements-py3.txt`](https://github.com/dj311/uob-summer-project/blob/master/requirements-py3.txt)
-The hardest requirement should be install `clang` which is the most important package for our project.
+
+
 ### The usage of clang
 In our project, we need to get ast tree for every C/C++ source code. This package `clang.cindex` provides us a way to generate `ast_root` from which we can walk all the children nodes in this ast tree.
 
