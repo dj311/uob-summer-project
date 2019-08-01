@@ -1,4 +1,4 @@
-All of our files have a tag, relating to a section of our project:
+All of our files have a tag at the beginning, relating to a section of our project:
 
   - DG: Data Generation - code used to generate and process the data used in our models
   - ILP: Inductive Logic Programming - code used to generate ILP rules and background knowledge and code used to run ILP systems and generate a rule from this
