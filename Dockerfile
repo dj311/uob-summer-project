@@ -38,13 +38,13 @@ COPY .swiplrc /root/.swiplrc
 
 # Progol
 RUN mkdir /progol
-RUN wget --output-document=/progol/progol5_0.tar.gz \
-    "https://www.doc.ic.ac.uk/~shm/Software/progol5.0/progol5_0.tar.gz"
+RUN wget --output-document=/progol/progol4_4.tar.gz \
+    "https://www.doc.ic.ac.uk/~shm/Software/progol4.4/progol4_4.tar.gz"
 RUN wget --output-document=/progol/expand.sh \
-    "https://www.doc.ic.ac.uk/~shm/Software/progol5.0/expand.sh"
-RUN cd /progol && gunzip progol5_0.tar.gz && tar xvf progol5_0.tar
-RUN cd /progol/source && make CC=gcc-4.8
-RUN cd /progol/source && make CC=gcc-4.8 qsample
+    "https://www.doc.ic.ac.uk/~shm/Software/progol4.4/expand.sh"
+RUN cd /progol && gunzip progol4_4.tar.gz && tar xvf progol4_4.tar
+RUN cd /progol/source && make CC=gcc-5
+RUN cd /progol/source && make CC=gcc-5 qsample
 
 # Python dependencies. These are most likely to change, so go near the bottom.
 RUN python -m pip install --upgrade pip
