@@ -17,7 +17,12 @@ def vertexToStr(vertex: Vertex, identifiers: Map[Vertex,Int]): String = {
   val str = new StringBuffer()
 
   str.append("id_")
-  str.append(identifiers(vertex).toString)
+  str.append(identifiers(vertex).toString + "_")
+
+  str.append("l_")
+  Try {
+    str.append(vertex.value2(NodeKeys.LINE_NUMBER).toString)
+  }
 
   str.toString
 }
