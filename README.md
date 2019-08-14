@@ -14,8 +14,11 @@ docker pull djwj/uob-summer-project
 
 The above Docker repo isn't public, but send dj311 a message (on Github) with your Docker Hub username and I'll give you permissions. Once the image is pulled,  run the container from the same directory as this file, via:
 
-  - `docker run --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
-  - `docker run --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project /bin/bash` to get a Bash shell.
+  - `docker run --name uob-summer-project --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
+  
+If you need a shell, you can exec in with `docker exec -it uob-summer-project /bin/bash` or whatever your favourite shell is.
+  
+
 
 ### Adding New Dependencies
 First, add them to the right place depending on their type:
