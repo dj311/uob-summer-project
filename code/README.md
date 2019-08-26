@@ -43,7 +43,7 @@ Since the data size is large, we use dask in our function named `preprocess_all_
 Node2vec requires edgelist for each ast. So by simplily removing the features we get node2vec function named `process_for_node2vec` which can be used in `preprocess_all_for_adjmatrix` to get adj matrix and `preprocess_all_for_node2vec`.
 
 ### Edgelist
-The outputs of all the edgelists are saved into other git repo named [`uob-summer-project-node2vec`](https://github.com/xihajun/uob-summer-project-node2vec).Edglist
+The outputs of all the edgelists are saved into other git repo named [`uob-summer-project-node2vec`](https://github.com/xihajun/uob-summer-project-node2vec)
 
 ## Adjacacency and Feature Matrices
 The adjencency matrix is saved into the file `../data/adj.pickle`.
