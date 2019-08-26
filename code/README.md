@@ -3,6 +3,11 @@ All of our files have a tag at the beginning, relating to a section of our proje
   - DG: Data Generation - code used to generate and process the data used in our models
   - ILP: Inductive Logic Programming - code used to generate ILP rules and background knowledge and code used to run ILP systems and generate a rule from this
   - ML: Machine Learning - code used to create any of our other machine learning models (stacking model and neural networks)
+  
+3 Notebooks must be ran on Google Colab in order to have enough RAM. These are:
+ML-adj-matrix-conv-neural-network.ipynb
+ML-adj-feat-matrix-conv-neural-network.ipynb
+ML-evaluating-final-models.ipynb
 
 # Data Generation
 
