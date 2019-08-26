@@ -17,7 +17,7 @@ We then focused on buffer overflow examples in the Juliet dataset. This subset i
 From here onwards, the data processing is split into:
   1. [./preprocess_code.py](./preprocess_code.py) prepares the data for our machine learning models. It uses clang to generate an abstract syntax tree for each datapoint, then generates graph (graph2vec) and node (node2vec) embeddings.
   2. [./DG-generating-adjacency-feature-matrix.ipynb](./DG-generating-adjacency-feature-matrix.ipynb) prepares the data for our machine learning models using graph/node embeddings.
-  2. [./DG-generate-minimal-ilp-dataset.ipynb](./DG-generate-minimal-ilp-dataset.ipynb])prepares the data for ILP using [Joern](https://joern.io/) code property graphs.
+  2. [./DG-generate-minimal-ilp-dataset.ipynb](./DG-generate-minimal-ilp-dataset.ipynb])prepares the data for ILP using  [Joern](https://joern.io/) code property graphs.
 
 
 ## Guide of preprocess_code
