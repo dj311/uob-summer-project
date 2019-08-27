@@ -5,9 +5,10 @@ All of our files have a tag at the beginning, relating to a section of our proje
   - ML: Machine Learning - code used to create any of our other machine learning models (stacking model and neural networks)
   
 3 Notebooks must be ran on Google Colab in order to have enough RAM. These are:
-ML-adj-matrix-conv-neural-network.ipynb
-ML-adj-feat-matrix-conv-neural-network.ipynb
-ML-evaluating-final-models.ipynb
+  
+  - ML-adj-matrix-conv-neural-network.ipynb
+  - ML-adj-feat-matrix-conv-neural-network.ipynb
+  - ML-evaluating-final-models.ipynb
 
 # Data Generation
 
