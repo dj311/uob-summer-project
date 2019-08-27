@@ -6,9 +6,9 @@ All of our files have a tag at the beginning, relating to a section of our proje
   
 Three notebooks must be ran on Google Colab in order to have enough RAM. These are:
   
-  - ML-adj-matrix-conv-neural-network.ipynb
-  - ML-adj-feat-matrix-conv-neural-network.ipynb
-  - ML-evaluating-final-models.ipynb
+  - [ML-adj-matrix-conv-neural-network.ipynb](ML-adj-matrix-conv-neural-network.ipynb)
+  - [ML-adj-feat-matrix-conv-neural-network.ipynb](ML-adj-feat-matrix-conv-neural-network.ipynb)
+  - [ML-evaluating-final-models.ipynb](ML-evaluating-final-models.ipynb)
   
 Some notebooks have a "Colab Setup" section. These setup the Google colab environment with the correct source files and data. They don't need to (and shouldn't) be run on your own machine.
 
@@ -48,23 +48,23 @@ We use the `graph_visualisation.py` script to visualise the resulting rules outp
  
 # ML
 
-  - ML-dense-neural-network-graph2vec.ipynb :: construction of a baseline feed-foward neural network using the graph2vec embedding generated via preprocess_code.py.
-  - ML-dense-neural-network-graph2vec.ipynb :: construction of convolutional neural network using the graph2vec embedding generated via preprocess_code.py.
-  - ML-ml-model-comparison-and-stacking-binary.ipynb :: construction of our stacking models.
-  - ML-adj-matrix-conv-neural-network.ipynb :: construction of convolutional neural network using the adjacency matrix representation (standard and random padding) generated via DG-generating-adjacency-feature-matrix.ipynb.
-  - ML-adj-feat-matrix-conv-neural-network.ipynb :: construction of convolutional neural network using the adjacency and feature matrices representation (standard and random padding) generated via DG-generating-adjacency-feature-matrix.ipynb.
-  - ML-adj-matrix-visualisation.ipynb :: visualising the adjacency matrix representation of source code.
-  - ML-evaluating-final-models.ipynb :: evaluation of machine learning models.
+  - [ML-dense-neural-network-graph2vec.ipynb](ML-dense-neural-network-graph2vec.ipynb) :: construction of a baseline feed-foward neural network using the graph2vec embedding generated via preprocess_code.py.
+  - [ML-dense-neural-network-graph2vec.ipynb](ML-dense-neural-network-graph2vec.ipynb) :: construction of convolutional neural network using the graph2vec embedding generated via preprocess_code.py.
+  - [ML-ml-model-comparison-and-stacking-binary.ipynb](ML-ml-model-comparison-and-stacking-binary.ipynb) :: construction of our stacking models.
+  - [ML-adj-matrix-conv-neural-network.ipynb](ML-adj-matrix-conv-neural-network.ipynb) :: construction of convolutional neural network using the adjacency matrix representation (standard and random padding) generated via DG-generating-adjacency-feature-matrix.ipynb.
+  - [ML-adj-feat-matrix-conv-neural-network.ipynb](ML-adj-feat-matrix-conv-neural-network.ipynb) :: construction of convolutional neural network using the adjacency and feature matrices representation (standard and random padding) generated via DG-generating-adjacency-feature-matrix.ipynb.
+  - [ML-adj-matrix-visualisation.ipynb](ML-adj-matrix-visualisation.ipynb) :: visualising the adjacency matrix representation of source code.
+  - [ML-evaluating-final-models.ipynb](ML-evaluating-final-models.ipynb) :: evaluation of machine learning models.
   
-# ML Periphery Experiments
+## ML Periphery Experiments
 
-  - ML-old-baseline-model-comparison_all_data.ipynb, ML-old-baseline-model-final-all-data.ipynb :: construction of dense feed forward neural network on graph2vec embeddings of the entire Juliet dataset involving multiple bug types.
-  - ML-visualisation-comparing-model-predictions.m :: t-SNE embeddings of machinel learning models' predictions.
-  - ML-node2vec-naive-model.ipynb :: construction of dense feed forward neural network on node2vec embeddings.
+  - [ML-old-baseline-model-comparison_all_data.ipynb](ML-old-baseline-model-comparison_all_data.ipynb), [ML-old-baseline-model-final-all-data.ipynb](ML-old-baseline-model-final-all-data.ipynb) :: construction of dense feed forward neural network on graph2vec embeddings of the entire Juliet dataset involving multiple bug types.
+  - [ML-visualisation-comparing-model-predictions.m](ML-visualisation-comparing-model-predictions.m) :: t-SNE embeddings of machinel learning models' predictions.
+  - [ML-node2vec-naive-model.ipynb](ML-node2vec-naive-model.ipynb) :: construction of dense feed forward neural network on node2vec embeddings.
 
 [Uncompleted] In the following notebooks, we experimented with out of sample performance with the VDISC dataset:
 
- - ML-outsample-vdisc-comparison-and-stacking-binary.ipynb
- - ML-outsample-vdisc-conv-neural-network-graph2vec.ipynb
- - ML-outsample-vdisc-dense-neural-network-graph2vec.ipynb
- - ML_adj_matrix_conv_neural_network_vdisc.ipynb
+ - [ML-outsample-vdisc-comparison-and-stacking-binary.ipynb](ML-outsample-vdisc-comparison-and-stacking-binary.ipynb)
+ - [ML-outsample-vdisc-conv-neural-network-graph2vec.ipynb](ML-outsample-vdisc-conv-neural-network-graph2vec.ipynb) 
+ - [ML-outsample-vdisc-dense-neural-network-graph2vec.ipynb](ML-outsample-vdisc-dense-neural-network-graph2vec.ipynb)
+ - [ML_adj_matrix_conv_neural_network_vdisc.ipynb](ML_adj_matrix_conv_neural_network_vdisc.ipynb)
