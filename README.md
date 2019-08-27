@@ -1,7 +1,12 @@
-# Machine Learning for Automated Vulnerability Detection in Source Code <small>(WIP)</small>
+# Machine Learning for Automated Vulnerability Detection in Source Code
 *Masters Project at University of Bristol*
 
-All of our documented code can be found in the [code](./code/) folder. The data used in this project can be found in the [data](./data/) folder. Generated figures and images can be found in the [images](./images/) folder.
+All of our documented code can be found in the [code](./code/) folder, for which the [code/README.md](code/README.md) file contains a guide. The data used in this project can be found in [data](./data/). Generated figures and images can be found in [images](./images/).
+
+Most of the code should run in our Docker environment (see `Development" below for setup details), with the exception of:
+
+  1. Progol :: There is a working Progol in the Docker image (available in the `/progol/` directory). However, to repeat our results, our scripts should be ran on BlueCrystal using CProgol 4.4 compiled with GCC 5.4.
+  2. Aleph :: We do not have redistribution rights for the ILP system we used.
 
 
 ## Development
@@ -14,10 +19,9 @@ docker pull djwj/uob-summer-project
 
 The above Docker repo isn't public, but send dj311 a message (on Github) with your Docker Hub username and I'll give you permissions. Once the image is pulled,  run the container from the same directory as this file, via:
 
-  - `docker run --name uob-summer-project --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
+  - `docker run --rm --name uob-summer-project --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
   
 If you need a shell, you can exec in with `docker exec -it uob-summer-project /bin/bash` or whatever your favourite shell is.
-  
 
 
 ### Adding New Dependencies
