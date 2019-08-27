@@ -46,8 +46,29 @@ We use the `graph_visualisation.py` script to visualise the resulting rules outp
  
  During this time, we took a reverse-engineering approach to find an ideal Progol rule. This allowed us to ensure our background knowledge was sufficiently expressive. This work was done in the [ILP-checking-an-ideal-rule-in-prolog.ipynb](ILP-checking-an-ideal-rule-in-prolog.ipynb).
  
- 
- 
+# ML
+
+  - ML-dense-neural-network-graph2vec.ipynb :: construction of a baseline feed-foward neural network using the graph2vec embedding generated via preprocess_code.py.
+  - ML-dense-neural-network-graph2vec.ipynb :: construction of convolutional neural network using the graph2vec embedding generated via preprocess_code.py.
+  - ML-ml-model-comparison-and-stacking-binary.ipynb :: construction of our stacking models.
+  - ML-adj-matrix-conv-neural-network.ipynb :: construction of convolutional neural network using the adjacency matrix representation (standard and random padding) generated via DG-generating-adjacency-feature-matrix.ipynb.
+  - ML-adj-feat-matrix-conv-neural-network.ipynb :: construction of convolutional neural network using the adjacency and feature matrices representation (standard and random padding) generated via DG-generating-adjacency-feature-matrix.ipynb.
+  - ML-adj-matrix-visualisation.ipynb :: visualising the adjacency matrix representation of source code.
+  - ML-evaluating-final-models.ipynb :: evaluation of machine learning models.
+  
+# ML Periphery Experiments
+
+  - ML-old-baseline-model-comparison_all_data.ipynb, ML-old-baseline-model-final-all-data.ipynb :: construction of dense feed forward neural network on graph2vec embeddings of the entire Juliet dataset involving multiple bug types.
+  - ML-visualisation-comparing-model-predictions.m :: t-SNE embeddings of machinel learning models' predictions.
+  - ML-node2vec-naive-model.ipynb :: construction of dense feed forward neural network on node2vec embeddings.
+
+[Uncompleted] In the following notebooks, we experimented with out of sample performance with the VDISC dataset:
+
+ - ML-outsample-vdisc-comparison-and-stacking-binary.ipynb
+ - ML-outsample-vdisc-conv-neural-network-graph2vec.ipynb
+ - ML-outsample-vdisc-dense-neural-network-graph2vec.ipynb
+ - ML_adj_matrix_conv_neural_network_vdisc.ipynb
+
 Move to other documentation files:
  
  
