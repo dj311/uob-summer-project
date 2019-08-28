@@ -1,7 +1,7 @@
 # Machine Learning for Automated Vulnerability Detection in Source Code
 *Masters Project at University of Bristol*
 
-All of our documented code can be found in the [code](./code/) folder, for which the [code/README.md](code/README.md) file contains a guide. The data used in this project can be found in [data](./data/). Generated figures and images can be found in [images](./images/).
+All of our code can be found in the [code](./code/) folder. Files are individually documented, while the [README.md](code/README.md) file guides you through the narrative and ordering of the project. The data used in this project can be found in [data](./data/). Generated figures and images can be found in [images](./images/).
 
 Most of the code should run in our Docker environment (see `Development" below for setup details), with the exception of:
 
