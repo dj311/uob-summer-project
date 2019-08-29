@@ -66,6 +66,7 @@ These notebooks contain experiments with other models, evaluation and visualisat
   - [ML-old-baseline-model-comparison_all_data.ipynb](ML-old-baseline-model-comparison_all_data.ipynb), [ML-old-baseline-model-final-all-data.ipynb](ML-old-baseline-model-final-all-data.ipynb) :: construction of dense feed forward neural network on graph2vec embeddings of the entire Juliet dataset involving multiple bug types.
   - [ML-visualisation-comparing-model-predictions.m](ML-visualisation-comparing-model-predictions.m) :: t-SNE embeddings of machinel learning models' predictions.
   - [ML-node2vec-naive-model.ipynb](ML-node2vec-naive-model.ipynb) :: construction of dense feed forward neural network on node2vec embeddings.
+  - [ML-adj-matrix-dense-neural-network](ML-adj-matrix-dense-neural-network.ipynb) :: construction of dense feed forward neural network on adjacency matrix representation.
 
 [Uncompleted] In the following notebooks, we experimented with out of sample performance with the VDISC dataset:
 
