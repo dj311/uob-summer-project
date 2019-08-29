@@ -23,7 +23,10 @@ RUN git clone https://github.com/benedekrozemberczki/graph2vec.git
 
 # joern
 RUN git clone https://github.com/ShiftLeftSecurity/joern.git /joern
-RUN cd joern && sbt stage
+# recent commits broke our toProlog and toDot scripts so go
+# back to an old one
+RUN cd /joern && git checkout cbca30d2631a48aed47be1ba46c6d8b5aa23c103
+RUN cd /joern && sbt stage
 
 # Prolog and ILP
 RUN git clone --depth 1 https://github.com/vscosta/yap-6.3 /yap
