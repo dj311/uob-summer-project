@@ -2,6 +2,12 @@
 library_directory('/metagol').
 :- use_module(library(metagol)).
 
+
+%% To run, exec into a djwj/uob-summer-project docker container
+%% change dircetory into /project/code then run:
+%%     swipl ILP-handcrafted-ilp-rules-test.pl
+
+
 %% metagol settings
 body_pred(alloc_mem/1).
 body_pred(pointer/1).
