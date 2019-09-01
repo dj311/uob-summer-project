@@ -9,7 +9,7 @@ Each of these three sections is described in detail below.
 Three notebooks must be ran on Google Colab in order to have enough RAM. These are:
   
   - [ML-adj-matrix-conv-neural-network.ipynb](ML-adj-matrix-conv-neural-network.ipynb)
-  - [ML-adj-feat-matrix-conv-neural-network.ipynb](ML-adj-feat-matrix-conv-neural-network.ipynb)
+  - [ML-adj-feature-matrix-conv-neural-network.ipynb](ML-adj-feature-matrix-conv-neural-network.ipynb)
   - [ML-evaluating-final-models.ipynb](ML-evaluating-final-models.ipynb)
   
 Some notebooks have a "Colab Setup" section. These setup the Google colab environment with the correct source files and data. They don't need to (and shouldn't) be run on your own machine.
@@ -56,7 +56,7 @@ We developed the following models, in chronological order:
   - [ML-conv-neural-network-graph2vec.ipynb](ML-conv-neural-network-graph2vec.ipynb) :: construction of convolutional neural network using the graph2vec embedding generated via [preprocess_code.py](preprocess_code.py)
   - [ML-ml-model-comparison-and-stacking-binary.ipynb](ML-ml-model-comparison-and-stacking-binary.ipynb) :: construction of our stacking models.
   - [ML-adj-matrix-conv-neural-network.ipynb](ML-adj-matrix-conv-neural-network.ipynb) :: construction of convolutional neural network using the adjacency matrix representation (standard and random padding) generated via [DG-generating-adjacency-feature-matrix.ipynb](DG-generating-adjacency-feature-matrix.ipynb).
-  - [ML-adj-feat-matrix-conv-neural-network.ipynb](ML-adj-feat-matrix-conv-neural-network.ipynb) :: construction of convolutional neural network using the adjacency and feature matrices representation (standard and random padding) generated via [DG-generating-adjacency-feature-matrix.ipynb](DG-generating-adjacency-feature-matrix.ipynb).
+  - [ML-adj-feature-matrix-conv-neural-network.ipynb](ML-adj-feature-matrix-conv-neural-network.ipynb) :: construction of convolutional neural network using the adjacency and feature matrices representation (standard and random padding) generated via [DG-generating-adjacency-feature-matrix.ipynb](DG-generating-adjacency-feature-matrix.ipynb).
   - [ML-adj-matrix-visualisation.ipynb](ML-adj-matrix-visualisation.ipynb) :: visualising the adjacency matrix representation of source code.
   - [ML-evaluating-final-models.ipynb](ML-evaluating-final-models.ipynb) :: evaluation of machine learning models.
   
