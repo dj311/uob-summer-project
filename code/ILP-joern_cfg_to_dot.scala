@@ -62,7 +62,7 @@ def toDot(graph: ScalaGraph): String = {
 
   buf.append("# REF\n")
   buf.append("{\n")
-  buf.append("edge[color=purple3,constraint=false]\n")
+  buf.append("edge[color=blue3,constraint=false]\n")
   graph.E.hasLabel("REF").l.foreach { e =>
     val parentVertex = vertexToStr(e.outVertex, vertex_identifiers).replace("\"","\'")
     val childVertex = vertexToStr(e.inVertex, vertex_identifiers).replace("\"","\'")
