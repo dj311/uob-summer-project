@@ -19,11 +19,13 @@ Use [Docker](https://www.docker.com/) to get a working development environment. 
 docker pull djwj/uob-summer-project
 ```
 
-The above Docker repo isn't public, but send dj311 a message (on Github) with your Docker Hub username and I'll give you permissions. Once the image is pulled,  run the container from the same directory as this file, via:
+The above Docker repo isn't public, but send dj311 a message (on Github) with your Docker Hub username and I'll give you permissions.
 
-  - `docker run --rm --name uob-summer-project --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project` to start a Jupyter server.
+Once the image is pulled,  run the container in the directory where you've cloned this repo, via:
+
+  - `docker run --rm --name uob-summer-project --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project`
   
-If you need a shell, you can exec in with `docker exec -it uob-summer-project /bin/bash` or whatever your favourite shell is.
+The above command will start a Jupyter server. If you need a shell, you can exec into the container with `docker exec -it uob-summer-project /bin/bash`. That's an easy way to run Prolog or similar.
 
 
 ### Adding New Dependencies
