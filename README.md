@@ -19,7 +19,7 @@ Use [Docker](https://www.docker.com/) to get a working development environment. 
 docker pull djwj/uob-summer-project
 ```
 
-The above Docker repo isn't public, but send dj311 a message (on Github) with your Docker Hub username and I'll give you permissions.
+The above Docker repo isn't public, but send Dan(dj311 on Github) a message with your Docker Hub username and I'll give you permissions. The access control is to avoid accidentally leaking files which are not public.
 
 Once the image is pulled,  run the container in the directory where you've cloned this repo, via:
 
