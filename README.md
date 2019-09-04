@@ -11,6 +11,8 @@ Most of the code should run in our Docker environment (see `Development" below f
 
 ## Development
 
+We use `git-lfs` for storing larger files (primarily those in the ./data/ and ./images/ directories). This means that you need `git-lfs` installed before running `git clone`. See [this guide](https://www.atlassian.com/git/tutorials/git-lfs) for more info. If you get errors loading `csv` files into Pandas, it's probably a problem with `git-lfs`.
+
 Use [Docker](https://www.docker.com/) to get a working development environment. The easiest way is to pull down the latest build from docker hub via:
 
 ```sh
