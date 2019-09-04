@@ -12,7 +12,7 @@ Three notebooks must be ran on Google Colab in order to have enough RAM. These a
   - [ML-adj-feature-matrix-conv-neural-network.ipynb](ML-adj-feature-matrix-conv-neural-network.ipynb)
   - [ML-evaluating-final-models.ipynb](ML-evaluating-final-models.ipynb)
   
-Some notebooks have a "Colab Setup" section. These setup the Google colab environment with the correct source files and data. They don't need to (and shouldn't) be run on your own machine.
+Some notebooks have a "Colab Setup" section. These should setup the Google colab environment with the correct source files and data. They don't need to (and shouldn't) be run on your own machine. If a notebook contains this section, this indicates that the notebook requires a large amount of RAM, though they should run in a colab VM with 25gb RAM.
 
 # Data Generation
 
