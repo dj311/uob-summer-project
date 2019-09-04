@@ -8,9 +8,7 @@ import io.shiftleft.queryprimitives.steps.Implicits.JavaIteratorDeco
 import javax.script.ScriptEngineManager
 import scala.io.Source
 
-/* APACHE from https://github.com/shiftleftsecurity/joern/ */
-/* TODO: license properly */
-
+/* This file is APACHE licensed, based off of script from https://github.com/shiftleftsecurity/joern/ */
 
 /** Some helper functions: adapted from ReachingDefPass.scala in codeproperty graph repo */
 def vertexToStr(vertex: Vertex, identifiers: Map[Vertex,Int]): String = {
