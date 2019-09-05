@@ -19,8 +19,6 @@ Use [Docker](https://www.docker.com/) to get a working development environment. 
 docker pull djwj/uob-summer-project
 ```
 
-The above Docker repo isn't public, but send Dan(dj311 on Github) a message with your Docker Hub username and I'll give you permissions. The access control is to avoid accidentally leaking files which are not public.
-
 Once the image is pulled,  run the container in the directory where you've cloned this repo, via:
 
   - `docker run --rm --name uob-summer-project --volume $PWD:/project --publish 8888:8888 --interactive --tty djwj/uob-summer-project`
@@ -40,10 +38,3 @@ Next, the Docker image needs to be rebuilt, then pushed up to the docker hub. Do
 docker build --tag djwj/uob-summer-project .
 docker push djwj/uob-summer-project
 ```
-
-If the second command complains about permissions, you probably need to:
-
-  1. Ensure you have an account on [Docker Hub](https://hub.docker.com).
-  2. Get yourself added as a contributor to the [uob-summer-project repository](https://docker.io/djwj/uob-summer-project).
-  3.  Sign into the account on the command line via `docker login`.
-
